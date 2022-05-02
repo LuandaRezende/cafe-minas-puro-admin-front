@@ -1,0 +1,30 @@
+.mainCards{
+  display: flex;
+  flex-direction: row; 
+  justify-content: center;
+  align-items: center;
+}
+
+.cards{
+  background: blue;
+  height: 80px;
+  margin: 30px; 
+  width: 100%;
+}
+
+@media (max-width: 668px) {
+  .mainCards{
+      display: inline;
+  }
+
+  .cards{
+      background: blue;
+      height: 80px;
+      margin: 30px;
+      width: auto; 
+  }
+
+  .sidebar{
+      display: none;
+  }
+}
