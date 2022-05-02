@@ -160,7 +160,7 @@ export default function SideBarMenu() {
     <div style={{display: 'flex'}}>
 
     <div className={styles.sidebar}>
-      <center style={{marginTop: '35px'}}><Image alt="Logo" loader={() => src} src={src} width={150} height={80}></Image></center>
+      <center style={{marginTop: '35px'}}><Image alt="Logo" srcSet={src} width={150} height={80}></Image></center>
 
     <div style={{margin: '20px'}}>
     <Nav defaultActiveKey="/home" className="flex-column">
@@ -230,7 +230,7 @@ export default function SideBarMenu() {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        <center><Image alt="Logo" loader={() => src} src={src} width={150} height={80}></Image></center>
+        <center><Image alt="Logo" srcSet={src} width={150} height={80}></Image></center>
 
         <div style={{margin: '20px'}}>
     <Nav defaultActiveKey="/home" className="flex-column">
