@@ -15,9 +15,6 @@ import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
 
-import SideNavbarDesktop from "../components/SideNavbarDesktop";
-import NavbarPanel from "../components/NavbarPanel";
-
 export default function SideBarMenu() {
   const [show, setShow] = useState(false);
 
@@ -140,72 +137,65 @@ export default function SideBarMenu() {
   const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
 
   return (
-    <div style={{display: 'flex'}}>
     
-      <div className={styles.sidebar}>
-        <SideNavbarDesktop></SideNavbarDesktop>
-      </div> 
+    <div className={styles.panelAdm}>
+      <p style={{margin: '20px', color: '#007bff'}}>Painel administrativo</p>
 
-    
-    <div style={{background: '#ededee', width: '100%'}}>
-      <NavbarPanel></NavbarPanel>
+      <GiCoffeeCup className={styles.iconSideBar} onClick={handleShow}></GiCoffeeCup>
+      <div> 
 
-      <div className={styles.calendar}> 
-          <div className={styles.filter}>
-          <strong>Data selecionada:</strong> 18/03/2022
-          <select className={styles.select}>
-            <option value="null">Selecione um vendedor</option>
-            <option value="Mauro">Mauro</option>
-            <option value="José">José</option>
-            <option value="Andressa">Andressa</option>
-          </select>
-          </div>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        <center><img alt="Logo" src={src}></img></center>
+
+        <div style={{margin: '20px'}}>
+    <Nav defaultActiveKey="/home" className="flex-column">
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/" className={styles.linkSidebar}><RiDashboardFill style={{ marginRight: '15px', fontSize: '20px'}}></RiDashboardFill>Dashboard</Nav.Link>
       </div>
 
-    <div className={styles.mainCards}>
-      <div className={styles.cards}> 
-          <p className={styles.titleCard}>Quantidade de clientes</p>
-          <p className={styles.valueCard}>1500</p>
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/clients" className={styles.linkSidebar}><FaUsers style={{ marginRight: '15px', fontSize: '20px'}}></FaUsers>Lista de clientes</Nav.Link>
       </div>
 
-      <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de vendas</p>
-      <p className={styles.valueCard}>200</p>
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/sales" className={styles.linkSidebar}><BsGraphUp style={{ marginRight: '15px', fontSize: '20px'}}></BsGraphUp>Vendas realizadas</Nav.Link>
       </div>
 
-      <div className={styles.cards}> 
-        <p className={styles.titleCard}>Quantidade de clientes pendentes</p>
-        <p className={styles.valueCard}>5</p>
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/travel" className={styles.linkSidebar}><RiMoneyDollarCircleFill style={{ marginRight: '15px', fontSize: '20px'}}></RiMoneyDollarCircleFill>Gastos viagem</Nav.Link>
       </div>
 
-      <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de gastos</p>
-      <p className={styles.valueCard}>350</p>
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/charge" className={styles.linkSidebar}><FaTruckMoving style={{ marginRight: '15px', fontSize: '20px'}}></FaTruckMoving>Lista de cargas</Nav.Link>
+      </div>
+
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/newproduct" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar produto</Nav.Link>
+      </div>
+
+    </Nav>
+    </div>
+        </Offcanvas.Body>
+      </Offcanvas>
       </div>
     </div>
-
-    <div className={styles.mainGraph}>
-      <div className={styles.graph}>
-        <HighchartsReact
-        highcharts={Highcharts}
-         options={options}
-         />
-      </div>
-
-      <div className={styles.graph}>
-      <HighchartsReact
-        highcharts={Highcharts}
-         options={optionsPie}
-         />
-        </div>      
-    </div>
-
-    
-  </div>
-
-    </div>
-
-    
+ 
 
 
     

@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container, NavDropdown, Navigation, NavItem, MenuItem, Button,Offcanvas } from "react-bootstrap";
+import { Form, Navbar, Nav, Container, NavDropdown, Navigation, NavItem, MenuItem, Button,Offcanvas, Table } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
@@ -18,7 +18,7 @@ import { GiCoffeeCup } from "react-icons/gi";
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
 
-export default function SideBarMenu() {
+export default function NewProduct() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -141,66 +141,59 @@ export default function SideBarMenu() {
 
   return (
     <div style={{display: 'flex'}}>
-    
-      <div className={styles.sidebar}>
+       <div className={styles.sidebar}>
         <SideNavbarDesktop></SideNavbarDesktop>
-      </div> 
+       </div> 
+    
 
     
     <div style={{background: '#ededee', width: '100%'}}>
-      <NavbarPanel></NavbarPanel>
+        <NavbarPanel></NavbarPanel>
 
-      <div className={styles.calendar}> 
-          <div className={styles.filter}>
-          <strong>Data selecionada:</strong> 18/03/2022
-          <select className={styles.select}>
-            <option value="null">Selecione um vendedor</option>
-            <option value="Mauro">Mauro</option>
-            <option value="José">José</option>
-            <option value="Andressa">Andressa</option>
-          </select>
-          </div>
+      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Produto:</Form.Label>
+            <Form.Control type="text" placeholder="Nome do produto..." />
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+            Adicionar
+        </Button>
+        </Form>
+        
+        <br />
+
+        <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Produto</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Café Minas Puro 500g</td>
+            <td>02/04/2022</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Café dozinha</td>
+            <td>01/05/2022</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Café Minas Puro tradicional</td>
+            <td>05/03/2022</td>
+          </tr>         
+        </tbody>
+    </Table> 
+
       </div>
 
-    <div className={styles.mainCards}>
-      <div className={styles.cards}> 
-          <p className={styles.titleCard}>Quantidade de clientes</p>
-          <p className={styles.valueCard}>1500</p>
-      </div>
-
-      <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de vendas</p>
-      <p className={styles.valueCard}>200</p>
-      </div>
-
-      <div className={styles.cards}> 
-        <p className={styles.titleCard}>Quantidade de clientes pendentes</p>
-        <p className={styles.valueCard}>5</p>
-      </div>
-
-      <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de gastos</p>
-      <p className={styles.valueCard}>350</p>
-      </div>
-    </div>
-
-    <div className={styles.mainGraph}>
-      <div className={styles.graph}>
-        <HighchartsReact
-        highcharts={Highcharts}
-         options={options}
-         />
-      </div>
-
-      <div className={styles.graph}>
-      <HighchartsReact
-        highcharts={Highcharts}
-         options={optionsPie}
-         />
-        </div>      
-    </div>
-
-    
+     
   </div>
 
     </div>

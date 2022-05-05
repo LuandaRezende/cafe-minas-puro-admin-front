@@ -15,6 +15,9 @@ import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
 
+import SideNavbarDesktop from "../components/SideNavbarDesktop";
+import NavbarPanel from "../components/NavbarPanel";
+
 export default function Clients() {
   const [show, setShow] = useState(false);
 
@@ -137,165 +140,13 @@ export default function Clients() {
   const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
 
   return (
-    // <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-    //   <Container>
-    //     <Link href="/">
-    //       <a className="navbar-brand">Next Context API</a>
-    //     </Link>
-    //     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-    //     <Navbar.Collapse id="responsive-navbar-nav">
-    //       <Nav className="me-auto"></Nav>
-    //       <Nav>
-    //         <Link href="/about">
-    //           <a className="nav-link">Sobre</a>
-    //         </Link>
-    //         <Link href="/contact">
-    //           <a className="nav-link">Contato</a>
-    //         </Link>
-    //       </Nav>
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
-
-    <div style={{display: 'flex'}}>
-
-    <div className={styles.sidebar}>
-      <center style={{marginTop: '35px'}}><Image alt="Logo" loader={() => src} src={src} width={150} height={80}></Image></center>
-
-    <div style={{margin: '20px'}}>
-    <Nav defaultActiveKey="/home" className="flex-column">
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/" className={styles.linkSidebar}><RiDashboardFill style={{ marginRight: '15px', fontSize: '20px'}}></RiDashboardFill>Dashboard</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/clients" eventKey="link-1" className={styles.linkSidebar}><FaUsers style={{ marginRight: '15px', fontSize: '20px'}}></FaUsers>Lista de clientes</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><BsGraphUp style={{ marginRight: '15px', fontSize: '20px'}}></BsGraphUp>Vendas realizadas</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><SiContactlesspayment style={{ marginRight: '15px', fontSize: '20px'}}></SiContactlesspayment>Pagamentos</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><RiMoneyDollarCircleFill style={{ marginRight: '15px', fontSize: '20px'}}></RiMoneyDollarCircleFill>Gastos viagem</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><FaTruckMoving style={{ marginRight: '15px', fontSize: '20px'}}></FaTruckMoving>Lista de cargas</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><FaUserMinus style={{ marginRight: '15px', fontSize: '20px'}}></FaUserMinus>Pendências clientes</Nav.Link>
-      </div>
-
-      <hr />
-    </Nav>
-    </div>
-    </div>
-
+   <div style={{display: 'flex'}}>
+      <div className={styles.sidebar}>
+        <SideNavbarDesktop></SideNavbarDesktop>
+      </div> 
     
     <div style={{background: '#ededee', width: '100%'}}>
-    <div className={styles.panelAdm}>
-      <p style={{margin: '20px', color: '#007bff'}}>Painel administrativo</p>
-
-      <GiCoffeeCup className={styles.iconSideBar} onClick={handleShow}></GiCoffeeCup>
-      <div> 
-      {/* <Button variant="primary" className={styles.button} onClick={handleShow}>
-        <FaBars></FaBars>
-      </Button> */}
-
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-          {/* <center style={{marginTop: '35px'}}><Image alt="Logo" loader={() => src} src={src} width={150} height={80}></Image></center> */}
-
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-        <center><Image alt="Logo" loader={() => src} src={src} width={150} height={80}></Image></center>
-
-        <div style={{margin: '20px'}}>
-    <Nav defaultActiveKey="/home" className="flex-column">
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/" className={styles.linkSidebar}><RiDashboardFill style={{ marginRight: '15px', fontSize: '20px'}}></RiDashboardFill>Dashboard</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link  eventKey="link-1" className={styles.linkSidebar}><FaUsers style={{ marginRight: '15px', fontSize: '20px'}}></FaUsers>Lista de clientes</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><BsGraphUp style={{ marginRight: '15px', fontSize: '20px'}}></BsGraphUp>Vendas realizadas</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><SiContactlesspayment style={{ marginRight: '15px', fontSize: '20px'}}></SiContactlesspayment>Pagamentos</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><RiMoneyDollarCircleFill style={{ marginRight: '15px', fontSize: '20px'}}></RiMoneyDollarCircleFill>Gastos viagem</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><FaTruckMoving style={{ marginRight: '15px', fontSize: '20px'}}></FaTruckMoving>Lista de cargas</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link eventKey="link-1" className={styles.linkSidebar}><FaUserMinus style={{ marginRight: '15px', fontSize: '20px'}}></FaUserMinus>Pendências clientes</Nav.Link>
-      </div>
-
-      <hr />
-    </Nav>
-    </div>
-        </Offcanvas.Body>
-      </Offcanvas>
-      </div>
-    </div>
-
-      {/* <div className={styles.calendar}> 
-          <div className={styles.filter}>
-          <strong>Data selecionada:</strong> 18/03/2022
-          <select className={styles.select}>
-            <option value="null">Selecione um vendedor</option>
-            <option value="all">Todos</option>
-            <option value="Mauro">Mauro</option>
-            <option value="José">José</option>
-            <option value="Andressa">Andressa</option>
-          </select>
-          </div>
-      </div> */}
+      <NavbarPanel></NavbarPanel>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
       <Table striped bordered hover>
