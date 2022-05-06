@@ -1,11 +1,7 @@
-import { useContext } from "react";
-import AppContext from "../AppContext";
-
 import { Container } from "react-bootstrap";
 import PageMain from "../components/home";
 
 export default function Home() {
-  const value = useContext(AppContext);
 
   return (
     <>

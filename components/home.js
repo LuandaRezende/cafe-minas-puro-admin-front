@@ -91,7 +91,7 @@ export default function SideBarMenu() {
       text: 'Quantidade de vendas'
   },
   subtitle:{
-    text: '(Últimos 6 meses)'
+    text: '(Últimos 3 meses)'
   },
   tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -120,20 +120,21 @@ export default function SideBarMenu() {
           name: 'Fevereiro',
           y: 11.84,
           color: '#ac64ad',
-      }, {
-          name: 'Março',
-          y: 10.85,
-          color: '#4d5360',
-      },{
-          name: 'Abril',
-          y: 25.50,
-          color: '#949fb1',
-      },
-      {
-          name: 'Maio',
-          y: 11.10,
-          color: '#e5e5e5',
       }]
+      // }, {
+      //     name: 'Março',
+      //     y: 10.85,
+      //     color: '#4d5360',
+      // },{
+      //     name: 'Abril',
+      //     y: 25.50,
+      //     color: '#949fb1',
+      // },
+      // {
+      //     name: 'Maio',
+      //     y: 11.10,
+      //     color: '#e5e5e5',
+      // }]
   }]
   };
 
@@ -152,7 +153,7 @@ export default function SideBarMenu() {
 
       <div className={styles.calendar}> 
           <div className={styles.filter}>
-          <strong>Data selecionada:</strong> 18/03/2022
+          <strong style={{marginRight: '2px'}}>Data selecionada:</strong> Últimos 3 meses
           <select className={styles.select}>
             <option value="null">Selecione um vendedor</option>
             <option value="Mauro">Mauro</option>
@@ -164,8 +165,8 @@ export default function SideBarMenu() {
 
     <div className={styles.mainCards}>
       <div className={styles.cards}> 
-          <p className={styles.titleCard}>Quantidade de clientes</p>
-          <p className={styles.valueCard}>1500</p>
+          <p className={styles.titleCard}>Quantidade de clientes cadastrados</p>
+          <p className={styles.valueCard}>5</p>
       </div>
 
       <div className={styles.cards}> 
@@ -174,12 +175,12 @@ export default function SideBarMenu() {
       </div>
 
       <div className={styles.cards}> 
-        <p className={styles.titleCard}>Quantidade de clientes pendentes</p>
+        <p className={styles.titleCard}>Quantidade de clientes que pagaram</p>
         <p className={styles.valueCard}>5</p>
       </div>
 
       <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de gastos</p>
+      <p className={styles.titleCard}>Quantidade de gastos do vendedor</p>
       <p className={styles.valueCard}>350</p>
       </div>
     </div>

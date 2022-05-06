@@ -4,7 +4,9 @@ import Image from "next/image";
 import { useContext } from "react";
 import AppContext from "../AppContext";
 import styles from "../styles/SideBarMenu.module.css";
-import React, {useState} from 'react';
+import React, {useState, ObjectRow} from 'react';
+
+import { format, compareAsc } from 'date-fns'
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -19,149 +21,57 @@ import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
 
 export default function NewProduct() {
-  const [show, setShow] = useState(false);
+  const [nameProduct, setNameProduct] = useState('');
+  const [date, setDate] = useState('');
+  const [products, setProducts] = useState([]);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
-  const options = {
-    chart: {
-      type: 'column'
-    },
-    title: '',
-     xAxis: {
-        categories: [
-            'Março',
-            'Abril',
-            'Maio',
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Quantidade'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        },
-        dataLabels: {
-          enabled: false           
-       },
-       showInLegend: true
-    },
-    legend: {
-      align: 'center',
-      verticalAlign: 'top',
-      layout: 'horizontal',
-      x: 0,
-      y: 0,
-    },
-    series: [{
-        name: 'Quantidade de clientes',
-        data: [49.9, 71.5, 106.4],
-        color: '#acd6fa',
-    }, {
-        name: 'Quantidade de vendas',
-        data: [83.6, 78.8, 98.5],
-        color: '#fadf98'
-    }, {
-        name: 'Quantidade de gastos',
-        data: [48.9, 38.8, 39.3],
-        color: '#faa4aa'
-    }]
-  };
+   function addNewProduct(){
 
-  const optionsPie = {
-    chart: {
-      type: 'pie'
-  },
-  title: {
-      text: 'Quantidade de vendas'
-  },
-  subtitle:{
-    text: '(Últimos 6 meses)'
-  },
-  tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  },
-  plotOptions: {
-      pie: {
-          cursor: 'pointer',
-          dataLabels: {
-              enabled: false
-          },
-          showInLegend: true
-      }
-  },
-  series: [{
-      name: 'Quantidade de vendas',
-      colorByPoint: true,
-      data: [{
-          name: 'Dezembro',
-          y: 81.40,
-          color: '#f7464a',
-      },{
-          name: 'Janeiro',
-          y: 61.41,
-          color: '#46bfbd',
-      }, {
-          name: 'Fevereiro',
-          y: 11.84,
-          color: '#ac64ad',
-      }, {
-          name: 'Março',
-          y: 10.85,
-          color: '#4d5360',
-      },{
-          name: 'Abril',
-          y: 25.50,
-          color: '#949fb1',
-      },
-      {
-          name: 'Maio',
-          y: 11.10,
-          color: '#e5e5e5',
-      }]
-  }]
-  };
+    const today = format(new Date(), 'dd/MM/yyyy');
+        
+    let newProduct = {
+        name: nameProduct,
+        date: today,
+    }
 
-  const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
+    products.push(newProduct)
 
+    setNameProduct('')
+    setDate('')
+  }
+
+  function deleteProduct(event, index){
+    event.preventDefault()
+    products.splice(index, 1);
+    setProducts([...products])
+}
+  
   return (
     <div style={{display: 'flex'}}>
        <div className={styles.sidebar}>
         <SideNavbarDesktop></SideNavbarDesktop>
        </div> 
     
-
-    
     <div style={{background: '#ededee', width: '100%'}}>
         <NavbarPanel></NavbarPanel>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Produto:</Form.Label>
-            <Form.Control type="text" placeholder="Nome do produto..." />
-        </Form.Group>
 
-        <Button variant="primary" type="submit">
-            Adicionar
-        </Button>
-        </Form>
-        
+      <Form>
+        <div style={{display: 'flex'}}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Produto:</Form.Label>
+              <Form.Control type="text" value={nameProduct} onChange={e => setNameProduct(e.target.value)} placeholder="Nome do produto..." />
+          </Form.Group>
+
+          <Button onClick={addNewProduct}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
+              Adicionar
+          </Button>
+        </div>
+      </Form>
+
+
         <br />
 
         <Table striped bordered hover>
@@ -170,28 +80,38 @@ export default function NewProduct() {
             <th>#</th>
             <th>Produto</th>
             <th>Data</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Café Minas Puro 500g</td>
-            <td>02/04/2022</td>
+        {products.map((product, index) => {
+        return (
+          <tr key={index}>
+            <td>{index}</td>
+            <td>{product.name}</td>
+            <td>{product.date}</td>
+            <td>
+              <Button variant="danger" onClick={() => deleteProduct(event, index)}>Excluir</Button>
+            </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Café dozinha</td>
-            <td>01/05/2022</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Café Minas Puro tradicional</td>
-            <td>05/03/2022</td>
-          </tr>         
+        );
+         })}
         </tbody>
     </Table> 
 
-      </div>
+
+
+    {/* {products.map((employee, index) => {
+        return (
+          <div key={index}>
+            <h2>name: {employee.name}</h2>
+            <hr />
+          </div>
+        );
+      })} */}
+
+
+  </div>
 
      
   </div>
