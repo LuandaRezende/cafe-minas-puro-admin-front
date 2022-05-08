@@ -15,6 +15,8 @@ import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
 
+import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
+
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
 
@@ -150,18 +152,7 @@ export default function Sales() {
     <div style={{background: '#ededee', width: '100%'}}>
       <NavbarPanel></NavbarPanel>
     
-      <div className={styles.calendar}> 
-          <div className={styles.filter}>
-          <strong>Data selecionada:</strong> -
-          <select className={styles.select}>
-            <option value="null">Selecione um vendedor</option>
-            <option value="all">Todos</option>
-            <option value="Mauro">Mauro</option>
-            <option value="José">José</option>
-            <option value="Andressa">Andressa</option>
-          </select>
-          </div>
-      </div>
+      <FilterCalendarAndSeller></FilterCalendarAndSeller>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>

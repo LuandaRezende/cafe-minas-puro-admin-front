@@ -18,6 +18,8 @@ import { GiCoffeeCup } from "react-icons/gi";
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
 
+import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
+
 import DatePicker from "react-datepicker";
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -168,42 +170,7 @@ export default function SideBarMenu() {
     <div style={{background: '#ededee', width: '100%'}}>
       <NavbarPanel></NavbarPanel>
 
-      <div className={styles.calendar}> 
-          <div className={styles.filter}>
-            <div style={{display: 'flex'}}>
-              <strong style={{marginRight: '2px'}}>Data selecionada:</strong>
-
-              {startDate ? format(startDate, 'dd/MM/yyyy') : last3Months}
-              
-              {/* {format(startDate, 'dd/MM/yyyy')} a {format(endDate, 'dd/MM/yyyy')} */}
-
-              <FaCalendarAlt style={{cursor: 'pointer', color: '#007bff', marginTop: '5px', marginLeft: '5px'}} onClick={handleShowModal}></FaCalendarAlt>
-
-              <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Selecione uma data</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>
-                      Data: <DatePicker dateFormat="dd/MM/yyyy" selectsStart locale={ptBR} selected={startDate} onChange={(date) => setStartDate(date)} />
-                    </p>
-                    
-                    {/* <p>
-                     Período final: <DatePicker dateFormat="dd/MM/yyyy" selectsEnd locale={ptBR} selected={endDate} startDate={startDate} endDate={endDate} onChange={(date) => setEndDate(date)} />
-                    </p> */}
-                </Modal.Body>
-              </Modal>
-            </div>
-          <select className={styles.select}>
-            <option value="null">Selecione um vendedor</option>
-            <option value="Mauro">Mauro</option>
-            <option value="José">José</option>
-            <option value="Andressa">Andressa</option>
-          </select>
-          </div>
-      </div>
-
-
+      <FilterCalendarAndSeller></FilterCalendarAndSeller>
 
     <div className={styles.mainCards}>
       <div className={styles.cards}> 
