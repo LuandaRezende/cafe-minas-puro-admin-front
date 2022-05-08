@@ -57,6 +57,7 @@ export default function NewProduct() {
         <NavbarPanel></NavbarPanel>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+       <p style={{color: '#495057'}}><GiCoffeeCup style={{fontSize:'20px'}}></GiCoffeeCup><span style={{marginLeft:'5px'}}>CADASTRAR PRODUTO</span></p>
 
       <Form>
         <div style={{display: 'flex'}}>

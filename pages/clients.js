@@ -149,6 +149,8 @@ export default function Clients() {
       <NavbarPanel></NavbarPanel>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+      <p style={{color: '#495057'}}><FaUsers style={{fontSize:'20px'}}></FaUsers><span style={{marginLeft:'5px'}}>LISTA DE CLIENTES</span></p>
+
       <Table striped bordered hover>
         <thead>
           <tr>

@@ -149,7 +149,7 @@ export default function Sales() {
     
     <div style={{background: '#ededee', width: '100%'}}>
       <NavbarPanel></NavbarPanel>
-   
+    
       <div className={styles.calendar}> 
           <div className={styles.filter}>
           <strong>Data selecionada:</strong> -
@@ -164,6 +164,8 @@ export default function Sales() {
       </div>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+       <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>
+
       <Table striped bordered hover>
         <thead>
           <tr>
