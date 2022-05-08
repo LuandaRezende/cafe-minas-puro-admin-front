@@ -166,7 +166,7 @@ export default function Sales() {
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>
 
-      <Table striped bordered hover>
+      <Table responsive striped bordered hover>
         <thead>
           <tr>
             <th>#</th>

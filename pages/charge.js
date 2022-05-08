@@ -166,7 +166,7 @@ export default function Charge() {
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
       <p style={{color: '#495057'}}><FaTruckMoving style={{fontSize:'20px'}}></FaTruckMoving><span style={{marginLeft:'5px'}}>GASTOS VIAGEM</span></p>
 
-      <Table striped bordered hover>
+      <Table responsive striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
