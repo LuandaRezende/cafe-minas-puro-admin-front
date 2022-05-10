@@ -139,7 +139,7 @@ export default function SideBarMenu() {
   return (
     
     <div className={styles.panelAdm}>
-      <p style={{margin: '20px', color: '#007bff'}} onClick={handleShow}>Painel administrativo</p>
+      <p style={{margin: '20px', color: '#007bff'}}>Painel administrativo</p>
 
       <GiCoffeeCup className={styles.iconSideBar} onClick={handleShow}></GiCoffeeCup>
       <div> 

@@ -163,20 +163,20 @@ export default function Clients() {
         <tbody>
           <tr>
             <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
+            <td>Alvorada Santa Rita do Sapucaí-MG</td>
+            <td>Alexandre</td>
             <td>02/04/2022</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
+            <td>EPA Santa Rita do Sapucaí</td>
+            <td>Andressa</td>
             <td>01/05/2022</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
+            <td>Unissul</td>
+            <td>André</td>
             <td>05/03/2022</td>
           </tr>         
         </tbody>
