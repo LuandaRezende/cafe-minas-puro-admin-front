@@ -155,29 +155,34 @@ export default function Clients() {
         <thead>
           <tr>
             <th>#</th>
-            <th>Cliente</th>
-            <th>Vendedor que cadastrou</th>
-            <th>Data</th>
+            <td><b>Cliente</b></td>
+            {/* <th>Vendedor que cadastrou</th> */}
+            <td><b>CNPJ</b></td>
+            <td><b>Cidade</b></td>
+            <td><b>Telefone</b></td>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
-            <td>Alvorada Santa Rita do Sapucaí-MG</td>
-            <td>Alexandre</td>
-            <td>02/04/2022</td>
+            <td>Supermercado Alvorada</td>
+            <td>17.833.301/0001-07</td>
+            <td>Santa Rita do Sapucaí-MG</td>
+            <td>(35) 3471-2633</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>EPA Santa Rita do Sapucaí</td>
-            <td>Andressa</td>
-            <td>01/05/2022</td>
+            <td>Supermercado EPA</td>
+            <td>08.277.805/0001-99</td>
+            <td>Santa Rita do Sapucaí-MG</td>
+            <td>(35) 3297-302</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Unissul</td>
-            <td>André</td>
-            <td>05/03/2022</td>
+            <td>Supermercado Unissul</td>
+            <td>06.311.489/0001-07</td>
+            <td>Alfenas-MG</td>
+            <td>(35) 3292-7025</td>
           </tr>         
         </tbody>
     </Table> 
