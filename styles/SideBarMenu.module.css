@@ -1,6 +1,7 @@
 .sidebar{
     /* background: purple; */
-    height: 120vh;
+    height: auto;
+    min-height: 120vh;
     width: 30%;
     box-shadow: 0 0 10px rgba(0,0,0,0.6);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.20);
@@ -56,6 +57,20 @@
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 30px;
+ }
+
+ .graphTwoColumn{
+  width: 100%; 
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+ }
+
+ .graphThreeColumn{
+  width: 100%; 
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
  }
 
  .calendar{
@@ -135,6 +150,20 @@
        margin-right: 30px;
        margin-bottom: 30px;
     }
+
+    .graphTwoColumn{
+      width: auto; 
+      margin-left: 30px;
+      margin-right: 30px;
+      margin-bottom: 30px;
+   }
+
+   .graphThreeColumn{
+    width: auto; 
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+   }
 
     .sidebar{
         display: none;

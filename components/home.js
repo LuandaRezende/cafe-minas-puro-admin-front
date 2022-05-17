@@ -42,25 +42,25 @@ export default function SideBarMenu() {
 
   // Ultimos 90 dias: new Date(new Date().setDate(new Date().getDate() - 90))
 
-  const last3Months = 'Últimos 3 meses';
+  const today = new Date();
 
-  const options = {
+  const optionsGraphOne = {
     chart: {
       type: 'column'
     },
-    title: '',
+    title: {
+      text: 'Total gasto no dia (R$)'
+     },
      xAxis: {
         categories: [
-            'Março',
-            'Abril',
-            'Maio',
+            '',
         ],
         crosshair: true
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Quantidade'
+            text: 'R$'
         }
     },
     tooltip: {
@@ -83,24 +83,209 @@ export default function SideBarMenu() {
     },
     legend: {
       align: 'center',
-      verticalAlign: 'top',
+      verticalAlign: 'bottom',
       layout: 'horizontal',
       x: 0,
       y: 0,
     },
     series: [{
-        name: 'Quantidade de clientes',
-        data: [49.9, 71.5, 106.4],
+        name: 'Gasto com gasolina',
+        data: [49.9],
         color: '#acd6fa',
     }, {
-        name: 'Quantidade de vendas',
-        data: [83.6, 78.8, 98.5],
+        name: 'Gasto com almoço',
+        data: [10],
         color: '#fadf98'
     }, {
-        name: 'Quantidade de gastos',
-        data: [48.9, 38.8, 39.3],
+        name: 'Outros gastos',
+        data: [39.3],
         color: '#faa4aa'
+    },{
+      name: 'Total',
+      data: [99.20],
+      color: '#28a745'
+  }]
+  };
+
+  const optionsGraphTwo = {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Entradas recebidas no dia em real (R$)'
+     },
+     xAxis: {
+        categories: [
+          ''
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'R$'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        },
+        dataLabels: {
+          enabled: false           
+       },
+       showInLegend: true
+    },
+    legend: {
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal',
+      x: 0,
+      y: 0,
+    },
+    series: [{
+        name: 'Total em vendas à vista',
+        data: [28.9],
+        color: '#acd6fa',
+    }, {
+        name: 'Total em vales pagos',
+        data: [20.6],
+        color: '#fadf98'
+    },{
+      name: 'Total',
+      data: [49.5],
+      color: '#28a745'
+  }]
+  };
+
+  const optionsGraphThree = {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Quantidade de vendas no dia'
+     },
+     xAxis: {
+        categories: [
+          ''
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'R$'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        },
+        dataLabels: {
+          enabled: false           
+       },
+       showInLegend: true
+    },
+    legend: {
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal',
+      x: 0,
+      y: 0,
+    },
+    series: [{
+        name: 'Quantidade de vendas no dia',
+        data: [200],
+        color: '#acd6fa',
     }]
+  };
+
+  const optionsGraphFour = {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Total de vendas realizadas no dia em real'
+     },
+     xAxis: {
+        categories: [
+          ''
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'R$'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        },
+        dataLabels: {
+          enabled: false           
+       },
+       showInLegend: true
+    },
+    legend: {
+      align: 'center',
+      verticalAlign: 'bottom',
+      layout: 'horizontal',
+      x: 0,
+      y: 0,
+    },
+    series: [{
+        name: 'Boleto',
+        data: [30.9],
+        color: '#acd6fa',
+    }, {
+        name: 'Cheque',
+        data: [10.2],
+        color: '#fadf98'
+    },{
+      name: 'Dinheiro',
+      data: [50.5],
+      color: '#28a745'
+  },{
+    name: 'Pix',
+    data: [200],
+    color: '#f7464a'
+  },{
+    name: 'Vales',
+    data: [100.25],
+    color: '#faa4aa'
+  },{
+    name: 'Total',
+    data: [392.10],
+    color: '#ac64ad'
+  }]
   };
 
   const optionsPie = {
@@ -108,13 +293,13 @@ export default function SideBarMenu() {
       type: 'pie'
   },
   title: {
-      text: 'Quantidade de vendas'
+      text: 'Entradas realizadas no mês'
   },
   subtitle:{
-    text: '(Últimos 3 meses)'
+    text: ''
   },
   tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      pointFormat: '{series.name}: <b>R${point.y}</b>'
   },
   plotOptions: {
       pie: {
@@ -126,35 +311,21 @@ export default function SideBarMenu() {
       }
   },
   series: [{
-      name: 'Quantidade de vendas',
+      name: 'Valor',
       colorByPoint: true,
       data: [{
-          name: 'Dezembro',
+          name: 'Pagamentos de vales',
           y: 81.40,
           color: '#f7464a',
       },{
-          name: 'Janeiro',
+          name: 'Pagamentos a vista',
           y: 61.41,
           color: '#46bfbd',
       }, {
-          name: 'Fevereiro',
-          y: 11.84,
+          name: 'Total',
+          y: 142.81,
           color: '#ac64ad',
       }]
-      // }, {
-      //     name: 'Março',
-      //     y: 10.85,
-      //     color: '#4d5360',
-      // },{
-      //     name: 'Abril',
-      //     y: 25.50,
-      //     color: '#949fb1',
-      // },
-      // {
-      //     name: 'Maio',
-      //     y: 11.10,
-      //     color: '#e5e5e5',
-      // }]
   }]
   };
 
@@ -173,24 +344,24 @@ export default function SideBarMenu() {
       <FilterCalendarAndSeller></FilterCalendarAndSeller>
 
     <div className={styles.mainCards}>
-      <div className={styles.cards}> 
-          <p className={styles.titleCard}>Quantidade de clientes cadastrados</p>
-          <p className={styles.valueCard}>5</p>
-      </div>
-
-      <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de vendas</p>
+    <div className={styles.cards}> 
+      <p className={styles.titleCard}>Quantidade total gasta (R$)</p>
       <p className={styles.valueCard}>200</p>
       </div>
 
       <div className={styles.cards}> 
-        <p className={styles.titleCard}>Quantidade de clientes que pagaram</p>
-        <p className={styles.valueCard}>5</p>
+          <p className={styles.titleCard}>Quantidade total de entradas (R$)</p>
+          <p className={styles.valueCard}>142.81</p>
       </div>
 
       <div className={styles.cards}> 
-      <p className={styles.titleCard}>Quantidade de gastos do vendedor</p>
-      <p className={styles.valueCard}>350</p>
+        <p className={styles.titleCard}>Quantidade de vendas no dia</p>
+        <p className={styles.valueCard}>200</p>
+      </div>
+
+      <div className={styles.cards}> 
+      <p className={styles.titleCard}>Total de vendas realizadas(R$)</p>
+      <p className={styles.valueCard}>392.10</p>
       </div>
     </div>
 
@@ -198,7 +369,7 @@ export default function SideBarMenu() {
       <div className={styles.graph}>
         <HighchartsReact
         highcharts={Highcharts}
-         options={options}
+         options={optionsGraphOne}
          />
       </div>
 
@@ -207,7 +378,32 @@ export default function SideBarMenu() {
         highcharts={Highcharts}
          options={optionsPie}
          />
-        </div>      
+      </div>      
+    </div>
+
+    <div className={styles.mainGraph}>
+      <div className={styles.graphTwoColumn}>
+        <HighchartsReact
+        highcharts={Highcharts}
+         options={optionsGraphTwo}
+         />
+      </div>
+
+     <div className={styles.graphTwoColumn}>
+        <HighchartsReact
+        highcharts={Highcharts}
+         options={optionsGraphThree}
+         />
+      </div>    
+    </div>
+
+    <div className={styles.mainGraph}>
+      <div className={styles.graphThreeColumn}>
+        <HighchartsReact
+        highcharts={Highcharts}
+         options={optionsGraphFour}
+         />
+      </div>  
     </div>
 
     

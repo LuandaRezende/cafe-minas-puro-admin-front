@@ -35,12 +35,12 @@ export default function SideBarMenu() {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
-  const [startDate, setStartDate] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   // Ultimos 90 dias: new Date(new Date().setDate(new Date().getDate() - 90))
 
-  const last3Months = 'Últimos 3 meses';
+  const today = new Date();
   
   const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
 
@@ -50,7 +50,7 @@ export default function SideBarMenu() {
             <div style={{display: 'flex'}}>
               <strong style={{marginRight: '2px'}}>Data selecionada:</strong>
 
-              {startDate ? format(startDate, 'dd/MM/yyyy') : last3Months}
+              {format(startDate, 'dd/MM/yyyy')}
               
               {/* {format(startDate, 'dd/MM/yyyy')} a {format(endDate, 'dd/MM/yyyy')} */}
 
@@ -58,7 +58,7 @@ export default function SideBarMenu() {
 
               <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                  <Modal.Title>Selecione uma data</Modal.Title>
+                  <Modal.Title><h5>Selecione uma data</h5></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>
@@ -68,6 +68,8 @@ export default function SideBarMenu() {
                     {/* <p>
                      Período final: <DatePicker dateFormat="dd/MM/yyyy" selectsEnd locale={ptBR} selected={endDate} startDate={startDate} endDate={endDate} onChange={(date) => setEndDate(date)} />
                     </p> */}
+
+                    <Button>Filtrar</Button>
                 </Modal.Body>
               </Modal>
             </div>
