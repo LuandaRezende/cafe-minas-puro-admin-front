@@ -14,6 +14,7 @@ import { FaUsers, FaTruckMoving, FaUserMinus, FaBars } from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
+import { MdPendingActions } from "react-icons/md"
 
 import SideNavbar from "../components/SideNavbarDesktop";
 
@@ -176,6 +177,12 @@ export default function SideBarMenu() {
       <Nav.Link href="/charge" className={styles.linkSidebar}><FaTruckMoving style={{ marginRight: '15px', fontSize: '20px'}}></FaTruckMoving>Lista de cargas</Nav.Link>
       </div>
 
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/pending" className={styles.linkSidebar}><MdPendingActions style={{ marginRight: '15px', fontSize: '20px'}}></MdPendingActions>Pendências dos clientes</Nav.Link>
+      </div>
+      
       <hr />
 
       <div className={styles.divLinks}>
