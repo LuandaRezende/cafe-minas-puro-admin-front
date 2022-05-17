@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
 import AppContext from "../AppContext";
-import styles from "../styles/SideBarMenu.module.css";
+import styles from "../styles/Dashboard.module.css";
 import React, {useState} from 'react';
 
 import Highcharts from 'highcharts';
@@ -182,7 +182,7 @@ export default function SideBarMenu() {
       <div className={styles.divLinks}>
       <Nav.Link href="/pending" className={styles.linkSidebar}><MdPendingActions style={{ marginRight: '15px', fontSize: '20px'}}></MdPendingActions>Pendências dos clientes</Nav.Link>
       </div>
-      
+
       <hr />
 
       <div className={styles.divLinks}>

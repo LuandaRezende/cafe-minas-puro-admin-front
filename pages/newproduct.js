@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
 import AppContext from "../AppContext";
-import styles from "../styles/SideBarMenu.module.css";
+import styles from "../styles/Dashboard.module.css";
 import React, {useState, ObjectRow} from 'react';
 
 import { format, compareAsc } from 'date-fns'
