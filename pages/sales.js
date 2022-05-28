@@ -13,7 +13,7 @@ import { RiDashboardFill, RiMoneyDollarCircleFill } from "react-icons/ri";
 import { FaUsers, FaTruckMoving, FaUserMinus, FaBars } from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTrash } from "react-icons/fa";
 import { GiCoffeeCup } from "react-icons/gi";
 
 import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
@@ -26,6 +26,11 @@ export default function Sales() {
   const [day, setDay] = useState('');
   const [products, setProducts] = useState([])
   const [seller, setSeller] = useState('');
+
+  const [showModalTrash, setShowModalTrash] = useState(false);
+
+  const handleCloseTrash = () => setShowModalTrash(false);
+  const handleShowTrash = () => setShowModalTrash(true);
 
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
@@ -82,22 +87,46 @@ export default function Sales() {
             <td>1</td>
             <td>Supermercado Alvorada</td>
             <td>José</td>
-            <td><FaSearch onClick={() => handleShow(1)}></FaSearch></td>
+            <td>
+              <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(1)}></FaSearch>
+              <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
+            </td>
           </tr>
           <tr>
             <td>2</td>
             <td>Supermercado Unissul</td>
             <td>Maria</td>
-            <td><FaSearch onClick={() => handleShow(2)}></FaSearch></td>
+            <td>
+              <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(2)}></FaSearch>
+              <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
+            </td>
           </tr>
           <tr>
             <td>2</td>
             <td>Supermercado Baronesa</td>
             <td>Natan</td>
-            <td><FaSearch onClick={() => handleShow(3)}></FaSearch></td> 
+            <td>
+              <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(3)}></FaSearch>
+              <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
+            </td> 
          </tr>         
         </tbody>
     </Table> 
+
+    <Modal show={showModalTrash} onHide={handleCloseTrash}>
+        <Modal.Header closeButton>
+          <Modal.Title><h5>Cancelar venda</h5></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Deseja cancelar esta venda?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseTrash}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handleCloseTrash}>
+            Sim
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

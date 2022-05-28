@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container, NavDropdown, Navigation, NavItem, MenuItem, Button,Offcanvas } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Navigation, NavItem, MenuItem, Button,Offcanvas, Table } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
@@ -14,11 +14,15 @@ import { FaUsers, FaTruckMoving, FaUserMinus, FaBars, FaMoneyCheckAlt } from "re
 import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
-import { MdPendingActions } from "react-icons/md"
 
-import SideNavbar from "../components/SideNavbarDesktop";
+import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
 
-export default function SideBarMenu() {
+import Form from 'react-bootstrap/Form';
+
+import SideNavbarDesktop from "../components/SideNavbarDesktop";
+import NavbarPanel from "../components/NavbarPanel";
+
+export default function Travel() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -140,66 +144,100 @@ export default function SideBarMenu() {
   const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
 
   return (
-    <div>
+    <div style={{display: 'flex'}}>
+
+      <div className={styles.sidebar}>
+        <SideNavbarDesktop></SideNavbarDesktop>
+      </div> 
+
     
-    {/* <SideNavbar></SideNavbar> */}
-      <center style={{marginTop: '35px'}}><img alt="Logo" src={src} width={150} height={80}></img></center>
+    <div style={{background: '#ededee', width: '100%'}}>
+       <NavbarPanel></NavbarPanel>
+       
+       <FilterCalendarAndSeller></FilterCalendarAndSeller>
 
-      <div style={{margin: '20px'}}>
-      <Nav defaultActiveKey="/home" className="flex-column">
-        <hr />
+      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+       <p style={{color: '#495057'}}><FaMoneyCheckAlt style={{fontSize:'20px'}}></FaMoneyCheckAlt><span style={{marginLeft:'5px'}}>FECHAMENTO DO MÊS</span></p>
+      <Table responsive striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Vale Pago</th>
+            <th>Vendas a vista</th>
+            <th>Total de vendas</th>
+            <th>Kg vendido</th>
+            <th>Gasto de viagem</th>
+            <th>Selecione a % de comissão</th>
+            <th>Comissão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>05/03/2022</td>
+            <td>R$320,00</td>
+            <td>R$360,00</td>
+            <td>R$50,00</td>
+            <td>R$100,00</td>
+            <td>R$160,00</td>
+            <td>
+            <Form.Select aria-label="Default select example">
+              <option>-</option>
+              <option value="1">1%</option>
+              <option value="1.5">1.5%</option>
+              <option value="3">3%</option>
+            </Form.Select>
+            </td>
+            <td>R$500</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>06/03/2022</td>
+            <td>R$322,00</td>
+            <td>R$80,00</td>
+            <td>R$110,00</td>
+            <td>R$100,00</td>
+            <td>R$60,00</td>
+            <td>
+            <Form.Select aria-label="Default select example">
+              <option>-</option>
+              <option value="1">1%</option>
+              <option value="1.5">1.5%</option>
+              <option value="3">3%</option>
+            </Form.Select>
+            </td>
+            <td>R$800</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>07/03/2022</td>
+            <td>R$280,00</td>
+            <td>R$35,00</td>
+            <td>R$100,00</td>
+            <td>R$200,00</td>
+            <td>R$60,00</td>
+            <td>
+            <Form.Select aria-label="Default select example">
+              <option>-</option>
+              <option value="1">1%</option>
+              <option value="1.5">1.5%</option>
+              <option value="3">3%</option>
+            </Form.Select>
+            </td>
+            <td>R$250</td>
+          </tr>         
+        </tbody>
+    </Table> 
 
-      <div className={styles.divLinks}>
-      <Nav.Link href="/" className={styles.linkSidebar}><RiDashboardFill style={{ marginRight: '15px', fontSize: '20px'}}></RiDashboardFill>Dashboard</Nav.Link>
+    <p>Total de comissão: R$1550 </p>
+
       </div>
 
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/clients" eventKey="link-1" className={styles.linkSidebar}><FaUsers style={{ marginRight: '15px', fontSize: '20px'}}></FaUsers>Lista de clientes</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/sales" className={styles.linkSidebar}><BsGraphUp style={{ marginRight: '15px', fontSize: '20px'}}></BsGraphUp>Vendas realizadas</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/travel" className={styles.linkSidebar}><RiMoneyDollarCircleFill style={{ marginRight: '15px', fontSize: '20px'}}></RiMoneyDollarCircleFill>Gastos viagem</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/charge" className={styles.linkSidebar}><FaTruckMoving style={{ marginRight: '15px', fontSize: '20px'}}></FaTruckMoving>Lista de cargas</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/pending" className={styles.linkSidebar}><MdPendingActions style={{ marginRight: '15px', fontSize: '20px'}}></MdPendingActions>Pendências dos clientes</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/month-closing" className={styles.linkSidebar}><FaMoneyCheckAlt style={{ marginRight: '15px', fontSize: '20px'}}></FaMoneyCheckAlt>Fechamento do mês</Nav.Link>
-      </div>
-
-      <hr />
-
-      <div className={styles.divLinks}>
-      <Nav.Link href="/new-product" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar produto</Nav.Link>
-      </div>
-
-      <hr />
-    </Nav>
-    </div>
-    
+     
   </div>
+
+    </div>
 
     
 

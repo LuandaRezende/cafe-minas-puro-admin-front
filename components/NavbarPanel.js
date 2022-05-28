@@ -10,7 +10,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import { RiDashboardFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FaUsers, FaTruckMoving, FaUserMinus, FaBars } from "react-icons/fa";
+import { FaUsers, FaTruckMoving, FaUserMinus, FaBars, FaMoneyCheckAlt } from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
 import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
@@ -193,7 +193,13 @@ export default function SideBarMenu() {
       <hr />
 
       <div className={styles.divLinks}>
-      <Nav.Link href="/newproduct" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar produto</Nav.Link>
+      <Nav.Link href="/month-closing" className={styles.linkSidebar}><FaMoneyCheckAlt style={{ marginRight: '15px', fontSize: '20px'}}></FaMoneyCheckAlt>Fechamento do mês</Nav.Link>
+      </div>
+
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/new-product" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar produto</Nav.Link>
       </div>
 
     </Nav>

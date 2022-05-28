@@ -49,25 +49,23 @@ export default function SideBarMenu() {
           <div className={styles.filter}>
             <div style={{display: 'flex'}}>
               <strong style={{marginRight: '2px'}}>Data selecionada:</strong>
-
-              {format(startDate, 'dd/MM/yyyy')}
               
-              {/* {format(startDate, 'dd/MM/yyyy')} a {format(endDate, 'dd/MM/yyyy')} */}
+              {format(startDate, 'dd/MM/yyyy')} a {format(endDate, 'dd/MM/yyyy')}
 
               <FaCalendarAlt style={{cursor: 'pointer', color: '#007bff', marginTop: '5px', marginLeft: '5px'}} onClick={handleShowModal}></FaCalendarAlt>
 
               <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                  <Modal.Title><h5>Selecione uma data</h5></Modal.Title>
+                  <Modal.Title><h5>Selecione um período</h5></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>
-                      Data: <DatePicker dateFormat="dd/MM/yyyy" selectsStart locale={ptBR} selected={startDate} onChange={(date) => setStartDate(date)} />
+                      Data inicial: <DatePicker dateFormat="dd/MM/yyyy" selectsStart locale={ptBR} selected={startDate} onChange={(date) => setStartDate(date)} />
                     </p>
                     
-                    {/* <p>
-                     Período final: <DatePicker dateFormat="dd/MM/yyyy" selectsEnd locale={ptBR} selected={endDate} startDate={startDate} endDate={endDate} onChange={(date) => setEndDate(date)} />
-                    </p> */}
+                    <p>
+                     Data final: <DatePicker dateFormat="dd/MM/yyyy" selectsEnd locale={ptBR} selected={endDate} startDate={startDate} endDate={endDate} onChange={(date) => setEndDate(date)} />
+                    </p>
 
                     <Button>Filtrar</Button>
                 </Modal.Body>
