@@ -79,7 +79,7 @@ export default function Travel() {
       </div> 
 
     
-    <div style={{background: '#ededee', width: '100%'}}>
+    <div style={{background: '#ededee', width: '100%', height: 'auto'}}>
        <NavbarPanel></NavbarPanel>
        
        <FilterCalendarAndSeller></FilterCalendarAndSeller>
@@ -133,10 +133,12 @@ export default function Travel() {
         </tbody>
     </Table> 
 
-    <p>Total de comissão: R$ {totalComission} </p>
-         <Button style={{float:'right', marginTop: '-33px'}} variant="primary">
+    <p className={styles.totalComission}>Total de comissão: R$ {totalComission} </p>
+         
+           <Button style={{float:'right', marginTop: '-33px'}} variant="primary">
             Salvar comissão
-         </Button>
+          </Button>
+         
 
 
       </div>

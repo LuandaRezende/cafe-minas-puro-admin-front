@@ -1,206 +1,210 @@
-.sidebar{
-    /* background: purple; */
-    height: auto;
-    min-height: 120vh;
-    width: 30%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.20);
+.sidebar {
+  /* background: purple; */
+  height: auto;
+  min-height: 120vh;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.mainCards{
-    display: flex;
-    flex-direction: row; 
-    justify-content: center;
-    align-items: center;
+.mainCards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.cards{
-    /* background: blue; */
-    background: #fff;
-    height: 80px;
-    margin-top: 30px; 
-    margin-left: 30px;
-    margin-right: 30px;
-    width: 100%;
-    text-align: right;
-    padding-right: 10px;
-    padding-top: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.20);
-    border-radius: 5px;
+.cards {
+  /* background: blue; */
+  background: #fff;
+  height: 80px;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
-.titleCard{
-    font-size: 10px;
-    color: #c3c3c3
-  }
-  
-  .valueCard{
-    font-size: 24px;
-    font-weight: 400;
-  }
-
-.button{
-    display: none;
+.titleCard {
+  font-size: 10px;
+  color: #c3c3c3;
 }
 
-.mainGraph{
-    display: flex;
-    flex-direction: row; 
-    justify-content: center;
-    align-items: center;
-  }
+.valueCard {
+  font-size: 24px;
+  font-weight: 400;
+}
 
-  .graph{
-    width: 100%; 
-    margin-top: 30px; 
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 30px;
- }
+.button {
+  display: none;
+}
 
- .graphTwoColumn{
-  width: 100%; 
+.mainGraph {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph {
+  width: 100%;
+  margin-top: 30px;
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 30px;
- }
+}
 
- .graphThreeColumn{
-  width: 100%; 
+.graphTwoColumn {
+  width: 100%;
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 30px;
- }
+}
 
- .calendar{
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.20);
-    border-radius: 5px;
-    height: 45px;
-    margin-top: 30px;
-    margin-right: 30px;
-    margin-left: 30px;
-  }
+.graphThreeColumn {
+  width: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
 
-.panelAdm{
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.20);
-    border-radius: 5px;
-    height: 60px;
-    width: 100%;
-    display: flex;
-  }
+.calendar {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  height: 45px;
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
 
-  /* .panelAdminAndIcon{
+.panelAdm {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  height: 60px;
+  width: 100%;
+  display: flex;
+}
+
+/* .panelAdminAndIcon{
     height: 60px;
     width: 100%;
     display: flex;
   } */
 
-  .linkSidebar{
-      padding: 0;
-      text-align: left;
-      color: #495057;
-  }
+.linkSidebar {
+  padding: 0;
+  text-align: left;
+  color: #495057;
+}
 
-  .divLinks{
-    padding-left: 20%;
-  }
+.divLinks {
+  padding-left: 20%;
+}
 
-  .iconSideBar{
-    display: none;
-  }
+.iconSideBar {
+  display: none;
+}
 
-  .filter{
-    display: flex;
-    padding: 10px;
-  }
+.filter {
+  display: flex;
+  padding: 10px;
+}
 
-  .select{
-    margin-left: 50px;    
- }
+.select {
+  margin-left: 50px;
+}
 
 @media (max-width: 820px) {
-    .mainCards{
-        display: inline;
-    }
+  .mainCards {
+    display: inline;
+  }
 
-    .cards{
-        /* background: blue; */
-        background: #fff;
-        height: 80px;
-        margin-top: 30px; 
-        margin-left: 30px;
-        margin-right: 30px;
-        width: auto; 
-        text-align: center;
-    }
+  .cards {
+    /* background: blue; */
+    background: #fff;
+    height: 80px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: auto;
+    text-align: center;
+  }
 
-    .mainGraph{
-        display: inline;
-    }
+  .mainGraph {
+    display: inline;
+  }
 
-    .graph{
-       width: auto; 
-       margin-top: 30px; 
-       margin-left: 30px;
-       margin-right: 30px;
-       margin-bottom: 30px;
-    }
-
-    .graphTwoColumn{
-      width: auto; 
-      margin-left: 30px;
-      margin-right: 30px;
-      margin-bottom: 30px;
-   }
-
-   .graphThreeColumn{
-    width: auto; 
+  .graph {
+    width: auto;
+    margin-top: 30px;
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 30px;
-   }
+  }
 
-    .sidebar{
-        display: none;
-    }
+  .graphTwoColumn {
+    width: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+  }
 
-    .button{
-        display: block;
-    }
+  .graphThreeColumn {
+    width: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+  }
 
-    .panelAdm{
-        align-items: center;
-        height: 60px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
+  .sidebar {
+    display: none;
+  }
 
-      .iconSideBar{
-        display: inline;
-        margin: 20px;
-        color: #007bff;
-        font-size: 25px;
-      }
+  .button {
+    display: block;
+  }
 
-      .filter{
-        display: inline;
-        padding: 10px;
-        /* height: 100px; */
-      }
+  .panelAdm {
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
-      .select{
-        margin-left: 10px;
-      }
+  .iconSideBar {
+    display: inline;
+    margin: 20px;
+    color: #007bff;
+    font-size: 25px;
+  }
 
-      .calendar{
-        height: 100px;
-        /* padding-top: 12px; */
-        padding-left: 20px;
-      }
+  .filter {
+    display: inline;
+    padding: 10px;
+    /* height: 100px; */
+  }
+
+  .select {
+    margin-left: 10px;
+  }
+
+  .calendar {
+    height: 120px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .totalComission {
+    font-size: 12px;
+  }
 }
