@@ -113,7 +113,7 @@ export default function Sales() {
         </tbody>
     </Table> 
 
-    <Modal show={showModalTrash} onHide={handleCloseTrash}>
+    <Modal centered show={showModalTrash} onHide={handleCloseTrash}>
         <Modal.Header closeButton>
           <Modal.Title><h5>Cancelar venda</h5></Modal.Title>
         </Modal.Header>
