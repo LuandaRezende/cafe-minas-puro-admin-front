@@ -79,6 +79,7 @@ export default function Sales() {
             <th>#</th>
             <th>Cliente</th>
             <th>Vendedor</th>
+            <th>Total</th>
             <th>Opções</th>
           </tr>
         </thead>
@@ -87,6 +88,7 @@ export default function Sales() {
             <td>1</td>
             <td>Supermercado Alvorada</td>
             <td>José</td>
+            <td>R$455.30</td>
             <td>
               <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(1)}></FaSearch>
               <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
@@ -96,6 +98,7 @@ export default function Sales() {
             <td>2</td>
             <td>Supermercado Unissul</td>
             <td>Maria</td>
+            <td>R$500</td>
             <td>
               <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(2)}></FaSearch>
               <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
@@ -105,6 +108,7 @@ export default function Sales() {
             <td>2</td>
             <td>Supermercado Baronesa</td>
             <td>Natan</td>
+            <td>R$200</td>
             <td>
               <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(3)}></FaSearch>
               <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
@@ -128,7 +132,7 @@ export default function Sales() {
         </Modal.Footer>
       </Modal>
 
-    <Modal show={show} onHide={handleClose}>
+    <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title><h5>Produtos vendidos por {seller}</h5></Modal.Title>
         </Modal.Header>
