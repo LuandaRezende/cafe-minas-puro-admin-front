@@ -79,7 +79,7 @@ export default function Sales() {
             <th>#</th>
             <th>Cliente</th>
             <th>Vendedor</th>
-            <th>Detalhes</th>
+            <th>Opções</th>
           </tr>
         </thead>
         <tbody>
