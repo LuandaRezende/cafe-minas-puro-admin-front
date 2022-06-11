@@ -46,7 +46,9 @@ export default function NewSeller() {
   }
 
   async function deleteProduct(event, index, id){
-    event.preventDefault();
+    event.preventDefault()
+    sellers.splice(index, 1);
+    setSellers([...sellers])
 
     await api.delete(`seller/delete/${id}`);
 
