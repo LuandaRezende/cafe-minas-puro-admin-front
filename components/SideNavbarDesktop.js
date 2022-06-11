@@ -196,6 +196,12 @@ export default function SideBarMenu() {
       </div>
 
       <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/new-seller" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar vendedor</Nav.Link>
+      </div>
+
+      <hr />
     </Nav>
     </div>
     

@@ -202,6 +202,12 @@ export default function SideBarMenu() {
       <Nav.Link href="/new-product" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar produto</Nav.Link>
       </div>
 
+      <hr />
+
+      <div className={styles.divLinks}>
+      <Nav.Link href="/new-seller" className={styles.linkSidebar}><GiCoffeeCup style={{ marginRight: '15px', fontSize: '20px'}}></GiCoffeeCup>Cadastrar vendedor</Nav.Link>
+      </div>
+
     </Nav>
     </div>
         </Offcanvas.Body>

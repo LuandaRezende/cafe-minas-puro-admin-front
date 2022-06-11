@@ -11,47 +11,46 @@ import NavbarPanel from "../components/NavbarPanel";
 
 import api from '../pages/api/api';
 
-export default function NewProduct() {
-  const [nameProduct, setNameProduct] = useState('');
+export default function NewSeller() {
+  const [nameSeller, setNameSeller] = useState('');
   const [date, setDate] = useState('');
-  const [products, setProducts] = useState([]);
+  const [sellers, setSellers] = useState([]);
 
    useEffect(() => {
-    getProducts();
+    getSellers();
   }, []);
 
-  async function getProducts(){
-    const response = await api.get('product/get-all');
-    setProducts(response.data)
+  async function getSellers(){
+    const response = await api.get('seller/get-all');
+      
+    setSellers(response.data)
   }
 
-   async function addNewProduct(){
+   async function addNewSeller(){
 
     const today = format(new Date(), 'yyyy-MM-dd HH:mm.sss');
         
-    let newProduct = {
-        name: nameProduct,
+    let newSeller = {
+        name: nameSeller,
         created_at: today,
     }
 
-    // products.push(newProduct)
+    // sellers.push(newSeller)
 
-    const response = await api.post('product/create', newProduct);
+    const response = await api.post('seller/create', newSeller);
 
-    getProducts();
+    getSellers();
 
-    setNameProduct('')
+    setNameSeller('')
     setDate('')
   }
 
   async function deleteProduct(event, index, id){
-    event.preventDefault()
-    products.splice(index, 1);
-    setProducts([...products])
+    event.preventDefault();
 
-    await api.delete(`product/delete/${id}`);
+    await api.delete(`seller/delete/${id}`);
 
-    getProducts();
+    getSellers();
 }
   
   return (
@@ -64,16 +63,16 @@ export default function NewProduct() {
         <NavbarPanel></NavbarPanel>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
-       <p style={{color: '#495057'}}><GiCoffeeCup style={{fontSize:'20px'}}></GiCoffeeCup><span style={{marginLeft:'5px'}}>CADASTRAR PRODUTO</span></p>
+       <p style={{color: '#495057'}}><GiCoffeeCup style={{fontSize:'20px'}}></GiCoffeeCup><span style={{marginLeft:'5px'}}>CADASTRAR VENDEDOR</span></p>
 
       <Form>
         <div style={{display: 'flex'}}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Produto:</Form.Label>
-              <Form.Control type="text" value={nameProduct} onChange={e => setNameProduct(e.target.value)} placeholder="Nome do produto..." />
+              <Form.Label>Nome do vendedor:</Form.Label>
+              <Form.Control type="text" value={nameSeller} onChange={e => setNameSeller(e.target.value)} placeholder="Nome do vendedor..." />
           </Form.Group>
 
-          <Button onClick={addNewProduct}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
+          <Button onClick={addNewSeller}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
               Adicionar
           </Button>
         </div>
@@ -86,20 +85,20 @@ export default function NewProduct() {
         <thead>
           <tr>
             <th>#</th>
-            <th>Produto</th>
+            <th>Vendedor</th>
             <th>Data</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-        {products.map((product, index) => {
+        {sellers.map((seller, index) => {
         return (
           <tr key={index}>
             <td>{index}</td>
-            <td>{product.name}</td>
-            <td>{product.created_at}</td>
+            <td>{seller.name}</td>
+            <td>{seller.created_at}</td>
             <td>
-              <Button variant="danger" onClick={() => deleteProduct(event, index, product.id_product)}>Excluir</Button>
+              <Button variant="danger" onClick={() => deleteProduct(event, index, seller.id_seller)}>Excluir</Button>
             </td>
           </tr>
         );
@@ -108,27 +107,12 @@ export default function NewProduct() {
     </Table> 
 
 
-
-    {/* {products.map((employee, index) => {
-        return (
-          <div key={index}>
-            <h2>name: {employee.name}</h2>
-            <hr />
-          </div>
-        );
-      })} */}
-
-
   </div>
 
      
   </div>
 
     </div>
-
-    
-
-
     
   );
 }
