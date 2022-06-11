@@ -1,50 +1,56 @@
-import { Form, Navbar, Nav, Container, NavDropdown, Navigation, NavItem, MenuItem, Button,Offcanvas, Table } from "react-bootstrap";
-import Link from "next/link";
-import Image from "next/image";
-import { useContext } from "react";
-import AppContext from "../AppContext";
+import { Form, Button, Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
-import React, {useState, ObjectRow} from 'react';
+import React, {useState, useEffect} from 'react';
 
-import { format, compareAsc } from 'date-fns'
+import { format } from 'date-fns'
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-import { RiDashboardFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FaUsers, FaTruckMoving, FaUserMinus, FaBars } from "react-icons/fa";
-import { BsGraphUp } from "react-icons/bs";
-import { SiContactlesspayment } from "react-icons/si";
 import { GiCoffeeCup } from "react-icons/gi";
 
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
+
+import api from '../pages/api/api';
 
 export default function NewProduct() {
   const [nameProduct, setNameProduct] = useState('');
   const [date, setDate] = useState('');
   const [products, setProducts] = useState([]);
 
+   useEffect(() => {
+    getProducts();
+  }, []);
 
-   function addNewProduct(){
+  async function getProducts(){
+    const response = await api.get('product/get-all');
+      
+    setProducts(response.data)
+  }
 
-    const today = format(new Date(), 'dd/MM/yyyy');
+   async function addNewProduct(){
+
+    const today = format(new Date(), 'yyyy-MM-dd HH:mm.sss');
         
     let newProduct = {
         name: nameProduct,
-        date: today,
+        created_at: today,
     }
 
     products.push(newProduct)
+
+    const response = await api.post('product/create', newProduct);
 
     setNameProduct('')
     setDate('')
   }
 
-  function deleteProduct(event, index){
+  async function deleteProduct(event, index, id){
     event.preventDefault()
     products.splice(index, 1);
     setProducts([...products])
+
+    await api.delete(`product/delete/${id}`);
+
+    getProducts();
 }
   
   return (
@@ -90,9 +96,9 @@ export default function NewProduct() {
           <tr key={index}>
             <td>{index}</td>
             <td>{product.name}</td>
-            <td>{product.date}</td>
+            <td>{product.created_at}</td>
             <td>
-              <Button variant="danger" onClick={() => deleteProduct(event, index)}>Excluir</Button>
+              <Button variant="danger" onClick={() => deleteProduct(event, index, product.id_product)}>Excluir</Button>
             </td>
           </tr>
         );
