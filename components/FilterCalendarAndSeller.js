@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useContext } from "react";
 import AppContext from "../AppContext";
 import styles from "../styles/Dashboard.module.css";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -25,8 +25,12 @@ import { format } from 'date-fns';
 
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function SideBarMenu() {
+import api from '../pages/api/api';
+
+export default function SideBarMenu({ setSeller, setStartDate, setEndDate }) {
   const [show, setShow] = useState(false);
+  const [sellers, setSellers] = useState([]);
+  // const [seller, setSeller] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,14 +39,34 @@ export default function SideBarMenu() {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-
   // Ultimos 90 dias: new Date(new Date().setDate(new Date().getDate() - 90))
+
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(new Date());
+
+  const startDate = new Date();
+  const endDate = new Date();
 
   const today = new Date();
   
-  const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
+  useEffect(() => {
+    getSellers();
+  }, []);
+
+  async function getSellers(){
+    const response = await api.get('seller/get-all');
+    setSellers(response.data);
+ }
+
+ function filterPeriod(){
+   setShowModal(false);
+   setStartDate(startDate);
+   setEndDate(endDate)
+ }
+
+ function filterSeller(idSeller){
+   setSeller(idSeller)
+ }
 
   return (
         <div className={styles.calendar}> 
@@ -59,24 +83,24 @@ export default function SideBarMenu() {
                   <Modal.Title><h5>Selecione um período</h5></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>
-                      Data inicial: <DatePicker dateFormat="dd/MM/yyyy" selectsStart locale={ptBR} selected={startDate} onChange={(date) => setStartDate(date)} />
-                    </p>
-                    
-                    <p>
-                     Data final: <DatePicker dateFormat="dd/MM/yyyy" selectsEnd locale={ptBR} selected={endDate} startDate={startDate} endDate={endDate} onChange={(date) => setEndDate(date)} />
-                    </p>
+                   
+                    <label>Data inicial:</label>
+                    <DatePicker dateFormat="dd/MM/yyyy" selectsStart locale={ptBR} selected={startDate} onChange={(date) => setStartDate(date)} />
 
-                    <Button>Filtrar</Button>
+                    <label style={{marginTop: '10px'}}>Data final:</label>
+                    <DatePicker dateFormat="dd/MM/yyyy" selectsEnd locale={ptBR} selected={endDate} startDate={startDate} endDate={endDate} onChange={(date) => setEndDate(date)} />
+
+                    <Button style={{marginTop: '10px'}} onClick={filterPeriod}>Filtrar</Button>
                 </Modal.Body>
               </Modal>
             </div>
-          <select className={styles.select}>
-            <option value="null">Selecione um vendedor</option>
-            <option value="Mauro">Mauro</option>
-            <option value="José">José</option>
-            <option value="Andressa">Andressa</option>
-          </select>
+
+              <select id="select-seller" name="" onChange={(event)=>filterSeller(event.target.value)} className={styles.select}>
+                <option value="">Selecione um vendedor </option>
+                {sellers.map(seller => 
+                    <option key={seller.id_seller} value={seller.id_seller}>{seller.name}</option>
+                )}
+              </select>
           </div>
       </div>    
   );
