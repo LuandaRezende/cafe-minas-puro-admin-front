@@ -53,7 +53,12 @@ export default function Travel() {
     <div style={{background: '#ededee', width: '100%'}}>
        <NavbarPanel></NavbarPanel>
        
-       <FilterCalendarAndSeller setSeller={setSeller} setStartDate={setStartDate} setEndDate={setEndDate}></FilterCalendarAndSeller>
+       <FilterCalendarAndSeller 
+        setSeller={setSeller} 
+        setStartDate={setStartDate} 
+        setEndDate={setEndDate}>
+          
+        </FilterCalendarAndSeller>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><RiMoneyDollarCircleFill style={{fontSize:'20px'}}></RiMoneyDollarCircleFill><span style={{marginLeft:'5px'}}>GASTOS VIAGEM</span></p>
