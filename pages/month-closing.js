@@ -1,19 +1,8 @@
-import { Navbar, Nav, Container, NavDropdown, OverlayTrigger, Popover, Navigation, NavItem, MenuItem, Button,Offcanvas, Table } from "react-bootstrap";
-import Link from "next/link";
-import Image from "next/image";
-import { useContext } from "react";
-import AppContext from "../AppContext";
+import { OverlayTrigger, Popover, Button,Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState} from 'react';
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-import { RiDashboardFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FaUsers, FaTruckMoving, FaUserMinus, FaBars, FaMoneyCheckAlt } from "react-icons/fa";
-import { BsGraphUp } from "react-icons/bs";
-import { SiContactlesspayment } from "react-icons/si";
-import { GiCoffeeCup } from "react-icons/gi";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 
 import { FcInfo } from "react-icons/fc";
 

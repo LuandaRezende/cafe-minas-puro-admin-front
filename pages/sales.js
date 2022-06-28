@@ -1,61 +1,99 @@
-import { Modal, Button,Offcanvas, Table } from "react-bootstrap";
-import Link from "next/link";
-import Image from "next/image";
-import { useContext } from "react";
-import AppContext from "../AppContext";
+import { Modal, Button, Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-import { RiDashboardFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FaUsers, FaTruckMoving, FaUserMinus, FaBars } from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
-import { SiContactlesspayment } from "react-icons/si";
 import { FaSearch, FaTrash } from "react-icons/fa";
-import { GiCoffeeCup } from "react-icons/gi";
+
+import swal from 'sweetalert';
 
 import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
 
+import { format } from 'date-fns'
+
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
+
+import api from '../pages/api/api';
 
 export default function Sales() {
   const [show, setShow] = useState(false);
   const [day, setDay] = useState('');
   const [products, setProducts] = useState([])
-  const [seller, setSeller] = useState('');
+  const [seller, setSeller] = useState(null);
+  const [client, setClient] = useState(null);
+  const [allList, setAllList] = useState([]);
+  const [sellerBy, setSellerBy] = useState([]);
+
+  const [idSale, setIdSale] = useState([]);
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const [showModalTrash, setShowModalTrash] = useState(false);
 
   const handleCloseTrash = () => setShowModalTrash(false);
-  const handleShowTrash = () => setShowModalTrash(true);
+  
+  
+  function handleShowTrash(idSale) {
+    setShowModalTrash(true); 
+    setIdSale(idSale)
+  };
 
   const handleClose = () => setShow(false);
-  const handleShow = (id) => {
-    if(id === 1){
-      setSeller('José')
-      setDay('15/04/2022')
-      setProducts(['Café Minas Puro tradicional 250g', 'Café Minas Puro extra forte 500g'])
+  const handleShow = (idSeller, idClient) => {
+    if(!idSeller){
+      idSeller = 1;
     }
 
-    if(id === 2){
-      setSeller('Maria')
-      setDay('10/02/2022')
-      setProducts(['Café Minas Puro tradicional 500g', 'Café dozinha 500g'])
+    for(let i=0; i < allList.length;i++){
+      if(allList[i].id_seller === idSeller){
+        setSellerBy(allList[i].name)
+      }
     }
 
-    if(id === 3){
-      setSeller('Natan')
-      setDay('09/03/2022')
-      setProducts(['Café Minas Puro expresso 1Kg', 'Café Minas Puro 1Kg'])
-    }
-    console.log(id)
+    getProducts(idSeller, idClient)
+   
     setShow(true)
   };
 
-  const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
+  async function getProducts(idSeller, idClient){
+    const response = await api.get(`sale/products/sale-made/${idClient}/${idSeller}`);
+
+    const data = response.data;
+
+    setProducts(data)
+  };
+
+  useEffect(() => {
+    getAllList();
+  }, []);
+
+  useEffect(() => {
+    updateData();
+  }, [seller, startDate, endDate]);
+
+  async function handleTrash(){
+    const response = await api.delete(`sale/delete/${idSale}`);
+
+    if(response.data){
+      swal("Sucesso!", "A venda e todos produtos referente a essa venda foram excluídos com sucesso!", "success");
+    }
+
+    updateData();
+
+    setShowModalTrash(false); 
+  }
+
+  async function getAllList(){
+    const response = await api.get('sale/all/sale-made');
+    setAllList(response.data)
+  }
+
+  async function updateData(){
+    const response = await api.get(`sale/sale-made/${seller}`);
+    setAllList(response.data)
+  }
 
   return (
     
@@ -68,7 +106,11 @@ export default function Sales() {
     <div style={{background: '#ededee', width: '100%'}}>
       <NavbarPanel></NavbarPanel>
     
-      <FilterCalendarAndSeller></FilterCalendarAndSeller>
+      <FilterCalendarAndSeller
+      setSeller={setSeller} 
+      setStartDate={setStartDate} 
+      setEndDate={setEndDate}
+      ></FilterCalendarAndSeller>
 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>
@@ -79,41 +121,22 @@ export default function Sales() {
             <th>#</th>
             <th>Cliente</th>
             <th>Vendedor</th>
-            <th>Total</th>
+            <th>Total (R$)</th>
             <th>Opções</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Supermercado Alvorada</td>
-            <td>José</td>
-            <td>R$455.30</td>
-            <td>
-              <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(1)}></FaSearch>
-              <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Supermercado Unissul</td>
-            <td>Maria</td>
-            <td>R$500</td>
-            <td>
-              <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(2)}></FaSearch>
-              <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Supermercado Baronesa</td>
-            <td>Natan</td>
-            <td>R$200</td>
-            <td>
-              <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(3)}></FaSearch>
-              <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(2)}></FaTrash>
-            </td> 
-         </tr>         
+        { allList.map( (seller, index) => <tr key = {index }> 
+                  <td> { index } </td>
+                  <td> { seller.corporate_name } </td>
+                  <td> { seller.name } </td>
+                  <td> { seller.total } </td>
+                  <td>
+                  <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(seller.id_seller, seller.id_client)}></FaSearch>
+                  <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(seller.id_sale)}></FaTrash>
+                </td>
+          </tr>) 
+        }         
         </tbody>
     </Table> 
 
@@ -121,12 +144,15 @@ export default function Sales() {
         <Modal.Header closeButton>
           <Modal.Title><h5>Cancelar venda</h5></Modal.Title>
         </Modal.Header>
-        <Modal.Body>Deseja cancelar esta venda?</Modal.Body>
+        <Modal.Body>
+           <p>Deseja cancelar esta venda?</p>
+           <span style={{fontSize: 10, fontWeight: 'bold', color: 'red'}}>Obs: Ao cancelar a venda, ela será retirada da base de dados assim como os produtos a ela relacionado.</span>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseTrash}>
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleCloseTrash}>
+          <Button variant="primary" onClick={handleTrash}>
             Sim
           </Button>
         </Modal.Footer>
@@ -134,15 +160,27 @@ export default function Sales() {
 
     <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title><h5>Produtos vendidos por {seller}</h5></Modal.Title>
+          <Modal.Title><h5>Produtos vendidos por {sellerBy}</h5></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Dia: {day}</p>
-          Lista de produtos:
-            <ul>
-              <li>{products[0]} - 200 unidades</li>
-              <li>{products[1]} - 301 unidades</li>
-            </ul>
+         {Object.keys(products).map((item,key)=>
+              <tr key = {key}> 
+                <td>
+                Data: { format(new Date(products[item][0].date), 'dd-MM-yyyy') }
+
+                    { products[item].map( (product, index) => 
+                          <tr key = {index }> 
+                            <td> 
+                              <li>{ product.name } - {product.quantity} unidades</li> 
+                            </td>
+                            </tr>) 
+                      } 
+
+                </td>
+              </tr>
+                     
+          )}
+        
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

@@ -4,27 +4,28 @@ import Image from "next/image";
 import { useContext } from "react";
 import AppContext from "../AppContext";
 import styles from "../styles/Dashboard.module.css";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-import { RiDashboardFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FaUsers, FaTruckMoving, FaUserMinus, FaBars } from "react-icons/fa";
-import { BsGraphUp } from "react-icons/bs";
-import { SiContactlesspayment } from "react-icons/si";
-import { GiCoffeeCup } from "react-icons/gi";
 import { MdPendingActions } from "react-icons/md"
 import { FcInfo } from "react-icons/fc";
 
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
 
+import api from '../pages/api/api';
+
 export default function Clients() {
   const [show, setShow] = useState(false);
+  const [listPending, setListPending] = useState([]);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData(){
+    const response = await api.get('clients/get/pending-customer');
+    setListPending(response.data)
+  }
 
   const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
 
@@ -66,30 +67,15 @@ export default function Clients() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Café Artesan</td>
-            <td>Jaguariúna-SP</td>
-            <td>R$12</td>
-            <td>0</td>
-            <td><span style={{color: 'red'}}>R$12</span></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Supermercado Alvorada</td>
-            <td>Santa Rita do Sapucaí-MG</td>
-            <td>R$50</td>
-            <td>0</td>
-            <td><span style={{color: 'red'}}>R$50</span></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Supermercado Unissul</td>
-            <td>Alfenas-MG</td>
-            <td>R$15,22</td>
-            <td>0</td>
-            <td><span style={{color: 'red'}}>R$12,25</span></td>
-          </tr>         
+        { listPending.map( (client, index) => <tr key = {index }> 
+                  <td> { index } </td>
+                  <td> { client.corporate_name } </td>
+                  <td> { client.city } </td>
+                  <td> { client.debit_amount } </td>
+                  <td> { client.amount_paid } </td>
+                  <td style={{color: 'red'}}> { client.pendency } </td>
+                </tr>) 
+        }         
         </tbody>
     </Table> 
 
