@@ -27,8 +27,6 @@ export default function Clients() {
     setListPending(response.data)
   }
 
-  const src = `http://cafeminaspuro.com.br/wp-content/uploads/2020/01/cropped-logoMinasCafe-2-140x83.png`;
-
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header as="h3">Informativo</Popover.Header>
