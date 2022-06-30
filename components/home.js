@@ -4,15 +4,12 @@ import React, {useState, useEffect} from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import SideNavbarDesktop from "../components/SideNavbarDesktop";
-import NavbarPanel from "../components/NavbarPanel";
+import SideNavbarDesktop from "./SideNavbarDesktop";
+import NavbarPanel from "./NavbarPanel";
 
-import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
+import FilterCalendarAndSeller from "./FilterCalendarAndSeller";
 
 import api from '../pages/api/api';
-
-import DatePicker from "react-datepicker";
-import ptBR from 'date-fns/locale/pt-BR';
 
 import { format } from 'date-fns';
 
@@ -45,7 +42,13 @@ export default function SideBarMenu() {
   const today = new Date();
 
   async function getData(){
-    const response = await api.get(`sale/data/dashboard/${seller}`);
+    const response = await api.get(`sale/data/dashboard/${seller}`, {
+      params: {
+        startDate: format(new Date(startDate), 'yyyy-MM-dd'),
+        endDate: format(new Date(endDate), 'yyyy-MM-dd'),
+        idSeller: seller,
+      }
+    });
 
     setAmountSpend(response.data.graphOne[0].totalGasto)
     setTotalInput(response.data.graphTwo[0].total)
@@ -67,7 +70,7 @@ export default function SideBarMenu() {
         type: 'column'
       },
       title: {
-        text: 'Total de vendas realizadas no dia em real'
+        text: 'Total de vendas realizadas em real'
        },
        xAxis: {
           categories: [
@@ -116,7 +119,7 @@ export default function SideBarMenu() {
         type: 'column'
       },
       title: {
-        text: 'Quantidade de vendas no dia'
+        text: 'Quantidade de vendas'
        },
        xAxis: {
           categories: [
@@ -169,7 +172,7 @@ export default function SideBarMenu() {
         type: 'column'
       },
       title: {
-        text: 'Entradas recebidas no dia em real (R$)'
+        text: 'Entradas recebidas em real (R$)'
        },
        xAxis: {
           categories: [
@@ -231,7 +234,7 @@ export default function SideBarMenu() {
         type: 'pie'
     },
     title: {
-        text: 'Entradas realizadas no mês'
+        text: 'Entradas realizadas'
     },
     subtitle:{
       text: ''
@@ -363,7 +366,7 @@ export default function SideBarMenu() {
       </div>
 
       <div className={styles.cards}> 
-        <p className={styles.titleCard}>Quantidade de vendas no dia</p>
+        <p className={styles.titleCard}>Quantidade de vendas</p>
         <p className={styles.valueCard}>{totalSales}</p>
       </div>
 
@@ -414,7 +417,8 @@ export default function SideBarMenu() {
       </div>  
     </div>
 
-    </div> : <p style={{textAlign: 'center', margin: '30px', background: 'red', color: '#fff'}}>Selecione um vendedor!</p> } 
+    </div> : <p style={{ margin: '30px', background: '#fff', padding: '25px'}}>Selecione um vendedor!</p>
+     } 
   </div> 
 
 </div>    

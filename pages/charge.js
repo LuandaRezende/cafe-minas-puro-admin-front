@@ -4,6 +4,8 @@ import React, {useState, useEffect} from 'react';
 
 import { FaTruckMoving } from "react-icons/fa";
 
+import { format } from 'date-fns'
+
 import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
 
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
@@ -14,7 +16,7 @@ import api from '../pages/api/api';
 export default function Charge() {
   const [show, setShow] = useState(false);
   const [charges, setCharges]= useState([]);
-  const [seller, setSeller] = useState('');
+  const [seller, setSeller] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -30,7 +32,13 @@ export default function Charge() {
   }, [seller, startDate, endDate]);
 
   async function updateData(){
-    const response = await api.get(`loads/get-seller/${seller}`);
+    const response = await api.get(`loads/get-seller/${seller}`, {
+      params: {
+        startDate: format(new Date(startDate), 'yyyy-MM-dd'),
+        endDate: format(new Date(endDate), 'yyyy-MM-dd'),
+        idSeller: seller,
+      }
+    });
     setCharges(response.data)
   }
 
@@ -57,6 +65,7 @@ export default function Charge() {
         setEndDate={setEndDate}>
       </FilterCalendarAndSeller>
 
+    { seller &&
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
       <p style={{color: '#495057'}}><FaTruckMoving style={{fontSize:'20px'}}></FaTruckMoving><span style={{marginLeft:'5px'}}>LISTA DE CARGAS</span></p>
 
@@ -83,6 +92,11 @@ export default function Charge() {
     </Table> 
 
       </div>
+  }
+
+    { !seller && <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+        <p>Selecione um vendedor!</p>
+      </div>}
 
      
   </div>

@@ -91,7 +91,14 @@ export default function Sales() {
   }
 
   async function updateData(){
-    const response = await api.get(`sale/sale-made/${seller}`);
+    const response = await api.get(`sale/sale-made/${seller}`, {
+      params: {
+        startDate: format(new Date(startDate), 'yyyy-MM-dd'),
+        endDate: format(new Date(endDate), 'yyyy-MM-dd'),
+        idSeller: seller,
+      }
+    });
+
     setAllList(response.data)
   }
 
@@ -112,6 +119,7 @@ export default function Sales() {
       setEndDate={setEndDate}
       ></FilterCalendarAndSeller>
 
+    {seller &&
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>
 
@@ -191,6 +199,14 @@ export default function Sales() {
 
 
       </div>
+    }
+
+    {
+      !seller && 
+      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+        <p>Selecione um vendedor!</p>
+      </div>
+    }
 
      
   </div>

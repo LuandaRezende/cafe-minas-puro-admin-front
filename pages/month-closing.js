@@ -43,10 +43,18 @@ export default function Travel() {
   }, [seller, startDate, endDate]);
 
   async function getData(){
-    const response = await api.get(`closure/${seller}`);
+    const response = await api.get(`closure/${seller}`, {
+      params: {
+        startDate: format(new Date(startDate), 'yyyy-MM-dd'),
+        endDate: format(new Date(endDate), 'yyyy-MM-dd'),
+        idSeller: seller,
+      }
+    });
+
     setDataTable(response.data)
     calcTotalComission(response.data);
   }
+
 
   function calcComission(porcentage, id){
     const _tempData = [...dataTable];
@@ -168,18 +176,22 @@ export default function Travel() {
           }
         </tbody>
     </Table> 
-
-    <p className={styles.totalComission}>Total de comissão: R$ {totalComission} </p>
+    {dataTable && dataTable.length > 0 && 
+          <div>
+            <p className={styles.totalComission}>Total de comissão: R$ {totalComission} </p>
          
            <Button style={{float:'right', marginTop: '-33px'}} onClick={saveComission} variant="primary">
             Salvar comissão
           </Button>
-
+          </div>
+      }
       </div> : 
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
         <p>Selecione um vendedor!</p>
       </div>
    }
+
+      
 
      
   </div>

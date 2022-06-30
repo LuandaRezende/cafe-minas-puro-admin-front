@@ -19,12 +19,14 @@ export default function Travel() {
   const [endDate, setEndDate] = useState(new Date());
   const [travelExpenses, setTravelExpenses]= useState([]);
 
-  // console.log('id vendedor', seller);
-  // console.log('data inicio', startDate);
-  // console.log('data fim', endDate)  
-
   async function updateData(){
-    const response = await api.get(`travel/get-seller/${seller}`);
+    const response = await api.get(`travel/get-seller/${seller}`,{
+    params: {
+      startDate: format(new Date(startDate), 'yyyy-MM-dd'),
+      endDate: format(new Date(endDate), 'yyyy-MM-dd'),
+      idSeller: seller,
+     }
+    });
     setTravelExpenses(response.data)
   }
 
@@ -60,8 +62,10 @@ export default function Travel() {
           
         </FilterCalendarAndSeller>
 
+    {seller &&
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><RiMoneyDollarCircleFill style={{fontSize:'20px'}}></RiMoneyDollarCircleFill><span style={{marginLeft:'5px'}}>GASTOS VIAGEM</span></p>
+     
       <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -85,11 +89,12 @@ export default function Travel() {
         </tbody>
     </Table> 
 
+      </div> 
+      } 
 
-
-
-      </div>
-
+      { !seller && <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+        <p>Selecione um vendedor!</p>
+      </div>}
      
   </div>
 
