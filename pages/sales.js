@@ -1,19 +1,13 @@
 import { Modal, Button, Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { BsGraphUp } from "react-icons/bs";
 import { FaSearch, FaTrash } from "react-icons/fa";
-
 import swal from 'sweetalert';
-
 import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
-
 import { format } from 'date-fns'
-
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
-
 import api from '../pages/api/api';
 
 export default function Sales() {
@@ -24,16 +18,11 @@ export default function Sales() {
   const [client, setClient] = useState(null);
   const [allList, setAllList] = useState([]);
   const [sellerBy, setSellerBy] = useState([]);
-
   const [idSale, setIdSale] = useState([]);
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
   const [showModalTrash, setShowModalTrash] = useState(false);
-
   const handleCloseTrash = () => setShowModalTrash(false);
-  
   
   function handleShowTrash(idSale) {
     setShowModalTrash(true); 
@@ -105,117 +94,98 @@ export default function Sales() {
   return (
     
     <div style={{display: 'flex'}}>
-
          <div className={styles.sidebar}>
             <SideNavbarDesktop></SideNavbarDesktop>
           </div> 
     
-    <div style={{background: '#ededee', width: '100%'}}>
-      <NavbarPanel></NavbarPanel>
-    
-      <FilterCalendarAndSeller
-      setSeller={setSeller} 
-      setStartDate={setStartDate} 
-      setEndDate={setEndDate}
-      ></FilterCalendarAndSeller>
+       <div style={{background: '#ededee', width: '100%'}}>
+          <NavbarPanel></NavbarPanel>
+            <FilterCalendarAndSeller
+            setSeller={setSeller} 
+            setStartDate={setStartDate} 
+            setEndDate={setEndDate}
+            ></FilterCalendarAndSeller>
 
-    {seller &&
-      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
-       <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>
+              {seller &&
+                <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+                    <p style={{color: '#495057'}}><BsGraphUp style={{fontSize:'20px'}}></BsGraphUp><span style={{marginLeft:'5px'}}>VENDAS REALIZADAS</span></p>
+                    <Table responsive striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Cliente</th>
+                          <th>Vendedor</th>
+                          <th>Total (R$)</th>
+                          <th>Opções</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      { allList.map( (seller, index) => <tr key = {index }> 
+                                <td> { index } </td>
+                                <td> { seller.corporate_name } </td>
+                                <td> { seller.name } </td>
+                                <td> { seller.total } </td>
+                                <td>
+                                <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(seller.id_seller, seller.id_client)}></FaSearch>
+                                <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(seller.id_sale)}></FaTrash>
+                              </td>
+                        </tr>) 
+                      }         
+                      </tbody>
+                  </Table> 
+                  
+                  <Modal centered show={showModalTrash} onHide={handleCloseTrash}>
+                      <Modal.Header closeButton>
+                        <Modal.Title><h5>Cancelar venda</h5></Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <p>Deseja cancelar esta venda?</p>
+                        <span style={{fontSize: 10, fontWeight: 'bold', color: 'red'}}>Obs: Ao cancelar a venda, ela será retirada da base de dados assim como os produtos a ela relacionado.</span>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseTrash}>
+                          Cancelar
+                        </Button>
+                        <Button variant="primary" onClick={handleTrash}>
+                          Sim
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                    <Modal centered show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title><h5>Produtos vendidos por {sellerBy}</h5></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        {Object.keys(products).map((item,key)=>
+                              <tr key = {key}> 
+                                <td>
+                                Data: { format(new Date(products[item][0].date), 'dd-MM-yyyy') }
 
-      <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Cliente</th>
-            <th>Vendedor</th>
-            <th>Total (R$)</th>
-            <th>Opções</th>
-          </tr>
-        </thead>
-        <tbody>
-        { allList.map( (seller, index) => <tr key = {index }> 
-                  <td> { index } </td>
-                  <td> { seller.corporate_name } </td>
-                  <td> { seller.name } </td>
-                  <td> { seller.total } </td>
-                  <td>
-                  <FaSearch style={{color: '#007bff', cursor: 'pointer', margin: '5px'}} onClick={() => handleShow(seller.id_seller, seller.id_client)}></FaSearch>
-                  <FaTrash style={{color: 'red', cursor: 'pointer', margin: '5px'}} onClick={() => handleShowTrash(seller.id_sale)}></FaTrash>
-                </td>
-          </tr>) 
-        }         
-        </tbody>
-    </Table> 
-
-    <Modal centered show={showModalTrash} onHide={handleCloseTrash}>
-        <Modal.Header closeButton>
-          <Modal.Title><h5>Cancelar venda</h5></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-           <p>Deseja cancelar esta venda?</p>
-           <span style={{fontSize: 10, fontWeight: 'bold', color: 'red'}}>Obs: Ao cancelar a venda, ela será retirada da base de dados assim como os produtos a ela relacionado.</span>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseTrash}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleTrash}>
-            Sim
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-    <Modal centered show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title><h5>Produtos vendidos por {sellerBy}</h5></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-         {Object.keys(products).map((item,key)=>
-              <tr key = {key}> 
-                <td>
-                Data: { format(new Date(products[item][0].date), 'dd-MM-yyyy') }
-
-                    { products[item].map( (product, index) => 
-                          <tr key = {index }> 
-                            <td> 
-                              <li>{ product.name } - {product.quantity} unidades</li> 
-                            </td>
-                            </tr>) 
-                      } 
-
-                </td>
-              </tr>
-                     
-          )}
-        
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-
-      </div>
-    }
-
-    {
-      !seller && 
-      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
-        <p>Selecione um vendedor!</p>
-      </div>
-    }
-
-     
-  </div>
-
+                                    { products[item].map( (product, index) => 
+                                          <tr key = {index }> 
+                                            <td> 
+                                              <li>{ product.name } - {product.quantity} unidades</li> 
+                                            </td>
+                                            </tr>) 
+                                      } 
+                                </td>
+                              </tr>       
+                          )}
+                      </Modal.Body>
+                  <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+          </Modal>
     </div>
-
-    
-
-
-    
-  );
+}
+{
+  !seller && 
+    <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+      <p>Selecione um vendedor!</p>
+    </div>
+}
+   </div>
+</div>);
 }

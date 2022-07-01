@@ -1,14 +1,10 @@
 import { Form, Button, Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { format } from 'date-fns'
-
 import { GiCoffeeCup } from "react-icons/gi";
-
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
-
 import api from '../pages/api/api';
 
 export default function NewProduct() {
@@ -34,8 +30,6 @@ export default function NewProduct() {
         created_at: today,
     }
 
-    // products.push(newProduct)
-
     const response = await api.post('product/create', newProduct);
 
     getProducts();
@@ -57,31 +51,27 @@ export default function NewProduct() {
   return (
     <div style={{display: 'flex'}}>
        <div className={styles.sidebar}>
-        <SideNavbarDesktop></SideNavbarDesktop>
+           <SideNavbarDesktop></SideNavbarDesktop>
        </div> 
-    
     <div style={{background: '#ededee', width: '100%'}}>
-        <NavbarPanel></NavbarPanel>
+       <NavbarPanel></NavbarPanel>
 
-      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
        <p style={{color: '#495057'}}><GiCoffeeCup style={{fontSize:'20px'}}></GiCoffeeCup><span style={{marginLeft:'5px'}}>CADASTRAR PRODUTO</span></p>
 
-      <Form>
-        <div style={{display: 'flex'}}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Produto:</Form.Label>
-              <Form.Control type="text" value={nameProduct} onChange={e => setNameProduct(e.target.value)} placeholder="Nome do produto..." />
-          </Form.Group>
+        <Form>
+          <div style={{display: 'flex'}}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Produto:</Form.Label>
+                <Form.Control type="text" value={nameProduct} onChange={e => setNameProduct(e.target.value)} placeholder="Nome do produto..." />
+            </Form.Group>
 
-          <Button onClick={addNewProduct}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
-              Adicionar
-          </Button>
-        </div>
-      </Form>
-
-
+            <Button onClick={addNewProduct}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
+                Adicionar
+            </Button>
+          </div>
+        </Form>
         <br />
-
         <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -92,43 +82,21 @@ export default function NewProduct() {
           </tr>
         </thead>
         <tbody>
-        {products.map((product, index) => {
-        return (
-          <tr key={index}>
-            <td>{index}</td>
-            <td>{product.name}</td>
-            <td>{product.created_at}</td>
-            <td>
-              <Button variant="danger" onClick={() => deleteProduct(event, index, product.id_product)}>Excluir</Button>
-            </td>
-          </tr>
-        );
-         })}
-        </tbody>
+            {products.map((product, index) => {
+            return (
+              <tr key={index}>
+                <td>{index}</td>
+                <td>{product.name}</td>
+                <td>{product.created_at}</td>
+                <td>
+                  <Button variant="danger" onClick={() => deleteProduct(event, index, product.id_product)}>Excluir</Button>
+                </td>
+              </tr>
+            );
+            })}
+       </tbody>
     </Table> 
-
-
-
-    {/* {products.map((employee, index) => {
-        return (
-          <div key={index}>
-            <h2>name: {employee.name}</h2>
-            <hr />
-          </div>
-        );
-      })} */}
-
-
-  </div>
-
-     
-  </div>
-
-    </div>
-
-    
-
-
-    
-  );
+   </div> 
+ </div>
+</div>);
 }

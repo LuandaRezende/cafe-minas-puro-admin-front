@@ -1,33 +1,24 @@
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
 import SideNavbarDesktop from "./SideNavbarDesktop";
 import NavbarPanel from "./NavbarPanel";
-
 import FilterCalendarAndSeller from "./FilterCalendarAndSeller";
-
-import api from '../pages/api/api';
-
 import { format } from 'date-fns';
-
 import "react-datepicker/dist/react-datepicker.css";
+import api from '../pages/api/api';
 
 export default function SideBarMenu() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState(new Date());
   const [seller, setSeller] = useState(null);
 
-  // Ultimos 90 dias: new Date(new Date().setDate(new Date().getDate() - 90))
-
   const [optionsGraphOne, setOptionsGraphOne] = useState(null);
   const [optionsPie, setOptionsPie] = useState(null);
   const [optionsGraphTwo, setOptionsGraphBar] = useState(null);
   const [optionsGraphThree, setOptionsGraphByDay] = useState(null);
   const [optionsGraphFour, setSaleByReal] = useState(null);
-
   const [amountSpend, setAmountSpend] = useState('');
   const [totalInput, setTotalInput] = useState('');
   const [totalSales, setTotalSales] = useState('');

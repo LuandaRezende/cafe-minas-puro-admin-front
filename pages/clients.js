@@ -1,12 +1,9 @@
 import { Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { FaUsers } from "react-icons/fa";
-
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
-
 import api from '../pages/api/api';
 
 export default function Clients() {
@@ -56,17 +53,7 @@ export default function Clients() {
             }   
         </tbody>
     </Table> 
-
-      </div>
-
-     
+   </div>  
   </div>
-
-    </div>
-
-    
-
-
-    
-  );
+</div>);
 }

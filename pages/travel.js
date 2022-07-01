@@ -1,16 +1,11 @@
 import { Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
-
 import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
-
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
-
 import { format } from 'date-fns';
-
 import api from '../pages/api/api';
 
 export default function Travel() {
@@ -46,21 +41,16 @@ export default function Travel() {
 
   return (
     <div style={{display: 'flex'}}>
-
       <div className={styles.sidebar}>
         <SideNavbarDesktop></SideNavbarDesktop>
       </div> 
-
-    
     <div style={{background: '#ededee', width: '100%'}}>
        <NavbarPanel></NavbarPanel>
-       
-       <FilterCalendarAndSeller 
-        setSeller={setSeller} 
-        setStartDate={setStartDate} 
-        setEndDate={setEndDate}>
-          
-        </FilterCalendarAndSeller>
+         <FilterCalendarAndSeller 
+          setSeller={setSeller} 
+          setStartDate={setStartDate} 
+          setEndDate={setEndDate}>
+          </FilterCalendarAndSeller>
 
     {seller &&
       <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
@@ -88,21 +78,11 @@ export default function Travel() {
                 </tr>) }
         </tbody>
     </Table> 
-
-      </div> 
-      } 
-
+  </div> 
+} 
       { !seller && <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
         <p>Selecione um vendedor!</p>
-      </div>}
-     
+      </div>} 
   </div>
-
-    </div>
-
-    
-
-
-    
-  );
+</div>);
 }

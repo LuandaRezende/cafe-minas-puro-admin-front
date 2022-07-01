@@ -1,38 +1,20 @@
 import { OverlayTrigger, Popover, Button,Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { FaMoneyCheckAlt } from "react-icons/fa";
-
 import { FcInfo } from "react-icons/fc";
-
+import swal from 'sweetalert';
 import FilterCalendarAndSeller from "../components/FilterCalendarAndSeller";
-
 import { format } from 'date-fns';
-
 import api from '../pages/api/api';
-
 import Form from 'react-bootstrap/Form';
-
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
 
 export default function Travel() {
-  const [show, setShow] = useState(false);
-  // const [dataTable, setDataTable] = useState(
-    // [
-    //   { id: 1, date: "05/03/2022", paidVoucher: 320, cashSales: 220, total: 540, kg: '200', travelExpenses: 200, totalCommission: 0  },
-    //   { id: 2, date: "06/03/2022", paidVoucher: 322, cashSales: 150, total: 472, kg: '150', travelExpenses: 100, totalCommission: 0 },
-    //   { id: 3, date: "07/03/2022", paidVoucher: 280, cashSales: 410, total: 690.52, kg: '800', travelExpenses: 50, totalCommission: 0  },
-    // ]
-  // );
-
   const [dataTable, setDataTable] = useState([]);
-
   const [totalComission, setTotalComission] = useState(0);
-
   const [seller, setSeller] = useState(null);
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -97,13 +79,16 @@ export default function Travel() {
 
   async function saveComission(){
     const res = await api.put('closure/update', { dataTable });
+    if(res.data){
+      swal("Sucesso!", "Comissão salva com sucesso!", "success");
+    }
   }
 
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header as="h3">Informativo</Popover.Header>
       <Popover.Body>
-         A comissão é calculada pelo total de vendas * ( porcentagem / 100);
+         A comissão é calculada pelo total da venda * ( porcentagem / 100);
       </Popover.Body>
     </Popover>
   );
@@ -141,8 +126,8 @@ export default function Travel() {
             <th>#</th>
             <th>Data</th>
             <th>Vale Pago</th>
-            <th>Vendas a vista</th>
-            <th>Total de vendas</th>
+            <th>Venda a vista</th>
+            <th>Total da venda</th>
             {/* <th>Kg vendido</th>
             <th>Gasto de viagem</th> */}
             <th>Selecione a % de comissão</th>
@@ -157,7 +142,7 @@ export default function Travel() {
                   <td>{key}</td>
                   <td>{format(new Date(value.date), 'dd-MM-yyyy')}</td>
                   <td>R${value.amountPaid}</td>
-                  <td>R${value.inCash}</td>
+                  <td>{value.inCash}</td>
                   <td>R${value.total}</td>
                   {/* <td>{value.kg}</td>
                   <td>R${value.travelExpenses}</td> */}
@@ -190,17 +175,6 @@ export default function Travel() {
         <p>Selecione um vendedor!</p>
       </div>
    }
-
-      
-
-     
   </div>
-
-    </div>
-
-    
-
-
-    
-  );
+</div>);
 }

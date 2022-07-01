@@ -1,23 +1,16 @@
 import { Button, Modal } from "react-bootstrap";
-
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { FaCalendarAlt } from "react-icons/fa";
-
 import DatePicker from "react-datepicker";
 import ptBR from 'date-fns/locale/pt-BR';
-
 import { format } from 'date-fns';
-
 import "react-datepicker/dist/react-datepicker.css";
-
 import api from '../pages/api/api';
 
 export default function SideBarMenu({ setSeller, setStartDate, setEndDate }) {
   const [show, setShow] = useState(false);
   const [sellers, setSellers] = useState([]);
-  // const [seller, setSeller] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,16 +19,8 @@ export default function SideBarMenu({ setSeller, setStartDate, setEndDate }) {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
-  // Ultimos 90 dias: new Date(new Date().setDate(new Date().getDate() - 90))
-
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
-
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
-
-  // const startDate = new Date();
-  // const endDate = new Date();
 
   setStartDate(start)
   setEndDate(end)

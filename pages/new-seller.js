@@ -1,14 +1,10 @@
 import { Form, Button, Table } from "react-bootstrap";
 import styles from "../styles/Dashboard.module.css";
 import React, {useState, useEffect} from 'react';
-
 import { format } from 'date-fns'
-
-import { GiCoffeeCup } from "react-icons/gi";
-
+import { AiOutlineUserAdd } from "react-icons/ai"
 import SideNavbarDesktop from "../components/SideNavbarDesktop";
 import NavbarPanel from "../components/NavbarPanel";
-
 import api from '../pages/api/api';
 
 export default function NewSeller() {
@@ -35,8 +31,6 @@ export default function NewSeller() {
         created_at: today,
     }
 
-    // sellers.push(newSeller)
-
     const response = await api.post('seller/create', newSeller);
 
     getSellers();
@@ -58,63 +52,53 @@ export default function NewSeller() {
   return (
     <div style={{display: 'flex'}}>
        <div className={styles.sidebar}>
-        <SideNavbarDesktop></SideNavbarDesktop>
+          <SideNavbarDesktop></SideNavbarDesktop>
        </div> 
-    
-    <div style={{background: '#ededee', width: '100%'}}>
-        <NavbarPanel></NavbarPanel>
+      <div style={{background: '#ededee', width: '100%'}}>
+          <NavbarPanel></NavbarPanel>
 
-      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
-       <p style={{color: '#495057'}}><GiCoffeeCup style={{fontSize:'20px'}}></GiCoffeeCup><span style={{marginLeft:'5px'}}>CADASTRAR VENDEDOR</span></p>
+            <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+             <p style={{color: '#495057'}}><AiOutlineUserAdd style={{fontSize:'20px'}}></AiOutlineUserAdd><span style={{marginLeft:'5px'}}>CADASTRAR VENDEDOR</span></p>
 
-      <Form>
-        <div style={{display: 'flex'}}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Nome do vendedor:</Form.Label>
-              <Form.Control type="text" value={nameSeller} onChange={e => setNameSeller(e.target.value)} placeholder="Nome do vendedor..." />
-          </Form.Group>
+              <Form>
+                <div style={{display: 'flex'}}>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Label>Nome do vendedor:</Form.Label>
+                      <Form.Control type="text" value={nameSeller} onChange={e => setNameSeller(e.target.value)} placeholder="Nome do vendedor..." />
+                  </Form.Group>
 
-          <Button onClick={addNewSeller}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
-              Adicionar
-          </Button>
-        </div>
-      </Form>
+                  <Button onClick={addNewSeller}  variant="primary" style={{height: '38px', marginTop: '32px'}}>
+                      Adicionar
+                  </Button>
+                </div>
+              </Form>
+              <br />
 
-
-        <br />
-
-        <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vendedor</th>
-            <th>Data</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-        {sellers.map((seller, index) => {
-        return (
-          <tr key={index}>
-            <td>{index}</td>
-            <td>{seller.name}</td>
-            <td>{seller.created_at}</td>
-            <td>
-              <Button variant="danger" onClick={() => deleteProduct(event, index, seller.id_seller)}>Excluir</Button>
-            </td>
-          </tr>
-        );
-         })}
-        </tbody>
-    </Table> 
-
-
+              <Table responsive striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Vendedor</th>
+                  <th>Data</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+              {sellers.map((seller, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>{seller.name}</td>
+                  <td>{seller.created_at}</td>
+                  <td>
+                    <Button variant="danger" onClick={() => deleteProduct(event, index, seller.id_seller)}>Excluir</Button>
+                  </td>
+                </tr>
+              );
+              })}
+              </tbody>
+          </Table> 
+       </div>     
   </div>
-
-     
-  </div>
-
-    </div>
-    
-  );
+</div>);
 }
