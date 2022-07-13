@@ -34,6 +34,7 @@ export default function Travel() {
     });
 
     setDataTable(response.data)
+    console.log('valor', response.data)
     calcTotalComission(response.data);
   }
 
@@ -123,13 +124,12 @@ export default function Travel() {
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
             <th>Data</th>
             <th>Vale Pago</th>
             <th>Venda a vista</th>
             <th>Total da venda</th>
-            {/* <th>Kg vendido</th>
-            <th>Gasto de viagem</th> */}
+            <th>Qtd. total(gr)</th>
+            <th>Gasto de viagem</th> 
             <th>Selecione a % de comissão</th>
             <th>Comissão</th>
           </tr>
@@ -139,13 +139,12 @@ export default function Travel() {
             dataTable.map((value, key) => {
               return (
                 <tr key={key}>
-                  <td>{key}</td>
                   <td>{format(new Date(value.date), 'dd-MM-yyyy')}</td>
                   <td>R${value.amountPaid}</td>
                   <td>{value.inCash}</td>
                   <td>R${value.total}</td>
-                  {/* <td>{value.kg}</td>
-                  <td>R${value.travelExpenses}</td> */}
+                  <td>{value.totalKg}</td>
+                  <td>R${value.spent}</td> 
                   <td>
                     <Form.Select value={value.percentual} onChange={(e) => calcComission(e.target.value, key)}>
                       <option>-</option>
