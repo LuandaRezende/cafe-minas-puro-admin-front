@@ -144,7 +144,7 @@ export default function Travel() {
                   <td>{value.inCash}</td>
                   <td>R${value.total}</td>
                   <td>{value.totalKg}</td>
-                  <td>R${value.spent}</td> 
+                  <td>{value.spent ? <span>R${value.spent}</span> : '-'}</td> 
                   <td>
                     <Form.Select value={value.percentual} onChange={(e) => calcComission(e.target.value, key)}>
                       <option>-</option>
