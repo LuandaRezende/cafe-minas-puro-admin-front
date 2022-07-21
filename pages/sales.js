@@ -155,7 +155,7 @@ export default function Sales() {
                         <Modal.Header closeButton>
                           <Modal.Title><h5>Produtos vendidos por {sellerBy}</h5></Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body style={{overflow: 'auto', height: '310px'}}>
                         {Object.keys(products).map((item,key)=>
                               <tr key = {key}> 
                                 <td>

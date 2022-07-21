@@ -15,8 +15,13 @@ export default function Clients() {
 
   async function getData(){
     const response = await api.get('clients/get-all');
+    let valores = [];
 
-    setClients(response.data);
+    for(let i = 0; i < 50; i++){
+      valores.push(response.data)
+    }
+
+    setClients(valores);
   }
 
   return (
@@ -28,7 +33,7 @@ export default function Clients() {
     <div style={{background: '#ededee', width: '100%'}}>
       <NavbarPanel></NavbarPanel>
 
-      <div style={{background: '#fff', margin: '30px', padding: '25px'}}>
+      <div style={{background: '#fff', margin: '30px', padding: '25px', overflow: 'auto', height: '100vh'}}>
       <p style={{color: '#495057'}}><FaUsers style={{fontSize:'20px'}}></FaUsers><span style={{marginLeft:'5px'}}>LISTA DE CLIENTES</span></p>
 
       <Table responsive striped bordered hover>
